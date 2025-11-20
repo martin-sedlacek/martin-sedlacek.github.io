@@ -32,13 +32,40 @@
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/images/favicon.svg">
+  <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%99%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
+
+  <style>
+    .perturbation-container {
+      position: relative;
+      width: 800px;
+      height: 800px;
+      margin: 50px auto;
+    }
+    .perturbation-segment {
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .perturbation-segment:hover {
+      opacity: 0.7;
+    }
+    .perturbation-label {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 20px;
+      fill: #333;
+      font-weight: bold;
+      pointer-events: none;
+    }
+    #perturbation-line {
+        stroke: black;
+        stroke-width: 2;
+    }
+  </style>
 </head>
 <body>
 
@@ -75,21 +102,27 @@
             <span class="author-block">
               <a href="">Pavlo Yefanov</a><sup>1</sup>,
             </span>
-<!--            <span class="author-block">-->
-<!--              <a href="https://jonbarron.info">Jonathan T. Barron</a><sup>2</sup>,-->
-<!--            </span>-->
-<!--            <span class="author-block">-->
-<!--              <a href="http://sofienbouaziz.com">Sofien Bouaziz</a><sup>2</sup>,-->
-<!--            </span>-->
-<!--            <span class="author-block">-->
-<!--              <a href="https://www.danbgoldman.com">Dan B Goldman</a><sup>2</sup>,-->
-<!--            </span>-->
-<!--            <span class="author-block">-->
-<!--              <a href="https://homes.cs.washington.edu/~seitz/">Steven M. Seitz</a><sup>1,2</sup>,-->
-<!--            </span>-->
-<!--            <span class="author-block">-->
-<!--              <a href="http://www.ricardomartinbrualla.com">Ricardo Martin-Brualla</a><sup>2</sup>-->
-<!--            </span>-->
+            <span class="author-block">
+              <a href="">Georgy Ponimatkin</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="">Simon Pilc</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="">Mederic Fourmy</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="">Evangelos Kazakos</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="">Cees Snoek</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="">Josef Sivic</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="">Vladimir Petrik</a><sup>1</sup>
+            </span>
           </div>
 
           <div class="is-size-5 publication-authors">
@@ -98,8 +131,13 @@
           </div>
 
           <div class="column has-text-centered">
+            <p class="is-size-5">🚧 Website under construction 🚧</p>
+            <p class="is-size-5">We are working on delivering a pre-print and open-sourcing the codebase for everyone to use as soon as possible. If you have questions, feedback, ideas, or are interested in using REALM please feel free to reach out to  <a href="mailto:martin.martin.sedlacek@gmail.com" class="text-blue-600 hover:text-blue-800 font-medium">Martin Sedlacek</a>.</p>
+          </div>
+
+          <div class="column has-text-centered">
+            <!--
             <div class="publication-links">
-              <!-- PDF Link. -->
               <span class="link-block">
                 <a href="https://arxiv.org/pdf/2011.12948"
                    class="external-link button is-normal is-rounded is-dark">
@@ -118,7 +156,6 @@
                   <span>arXiv</span>
                 </a>
               </span>
-              <!-- Video Link. -->
               <span class="link-block">
                 <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
                    class="external-link button is-normal is-rounded is-dark">
@@ -128,7 +165,6 @@
                   <span>Video</span>
                 </a>
               </span>
-              <!-- Code Link. -->
               <span class="link-block">
                 <a href="https://github.com/google/nerfies"
                    class="external-link button is-normal is-rounded is-dark">
@@ -138,7 +174,6 @@
                   <span>Code</span>
                   </a>
               </span>
-              <!-- Dataset Link. -->
               <span class="link-block">
                 <a href="https://github.com/google/nerfies/releases/tag/0.1"
                    class="external-link button is-normal is-rounded is-dark">
@@ -148,7 +183,7 @@
                   <span>Data</span>
                   </a>
             </div>
-
+            -->
           </div>
         </div>
       </div>
@@ -156,284 +191,251 @@
   </div>
 </section>
 
-<!--<section class="hero teaser">-->
-<!--  <div class="container is-max-desktop">-->
-<!--    <div class="hero-body">-->
-<!--      <video id="teaser" autoplay muted loop playsinline height="100%">-->
-<!--        <source src="./static/videos/teaser.mp4"-->
-<!--                type="video/mp4">-->
-<!--      </video>-->
-<!--      <h2 class="subtitle has-text-centered">-->
-<!--        <span class="dnerf">Nerfies</span> turns selfie videos from your phone into-->
-<!--        free-viewpoint-->
-<!--        portraits.-->
-<!--      </h2>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</section>-->
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Overview. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Overview</h2>
+        <div class="content has-text-justified">
+          <p>
+            <img src="./static/images/poster_teaser.png" alt="Overview Figure">
+            <b>REALM</b> is a large-scale real-to-sim aligned simulation environment and benchmark for generalization
+              in robotic manipulation. It supports 7 distinct manipulation skills and stress-tests them
+              against 15 perturbations. Through empirical validation, we show that evaluation results in
+              simulation are strongly correlated to real-world performance.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Overview. -->
 
-
-<!--<section class="hero is-light is-small">-->
-<!--  <div class="hero-body">-->
-<!--    <div class="container">-->
-<!--      <div id="results-carousel" class="carousel results-carousel">-->
-<!--        <div class="item item-steve">-->
-<!--          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">-->
-<!--            <source src="./static/videos/steve.mp4"-->
-<!--                    type="video/mp4">-->
-<!--          </video>-->
-<!--        </div>-->
-<!--        <div class="item item-chair-tp">-->
-<!--          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">-->
-<!--            <source src="./static/videos/chair-tp.mp4"-->
-<!--                    type="video/mp4">-->
-<!--          </video>-->
-<!--        </div>-->
-<!--        <div class="item item-shiba">-->
-<!--          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">-->
-<!--            <source src="./static/videos/shiba.mp4"-->
-<!--                    type="video/mp4">-->
-<!--          </video>-->
-<!--        </div>-->
-<!--        <div class="item item-fullbody">-->
-<!--          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">-->
-<!--            <source src="./static/videos/fullbody.mp4"-->
-<!--                    type="video/mp4">-->
-<!--          </video>-->
-<!--        </div>-->
-<!--        <div class="item item-blueshirt">-->
-<!--          <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">-->
-<!--            <source src="./static/videos/blueshirt.mp4"-->
-<!--                    type="video/mp4">-->
-<!--          </video>-->
-<!--        </div>-->
-<!--        <div class="item item-mask">-->
-<!--          <video poster="" id="mask" autoplay controls muted loop playsinline height="100%">-->
-<!--            <source src="./static/videos/mask.mp4"-->
-<!--                    type="video/mp4">-->
-<!--          </video>-->
-<!--        </div>-->
-<!--        <div class="item item-coffee">-->
-<!--          <video poster="" id="coffee" autoplay controls muted loop playsinline height="100%">-->
-<!--            <source src="./static/videos/coffee.mp4"-->
-<!--                    type="video/mp4">-->
-<!--          </video>-->
-<!--        </div>-->
-<!--        <div class="item item-toby">-->
-<!--          <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">-->
-<!--            <source src="./static/videos/toby2.mp4"-->
-<!--                    type="video/mp4">-->
-<!--          </video>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</section>-->
-
-
-<!--<section class="section">-->
-<!--  <div class="container is-max-desktop">-->
-<!--    &lt;!&ndash; Abstract. &ndash;&gt;-->
-<!--    <div class="columns is-centered has-text-centered">-->
-<!--      <div class="column is-four-fifths">-->
-<!--        <h2 class="title is-3">Abstract</h2>-->
-<!--        <div class="content has-text-justified">-->
-<!--          <p>-->
-<!--            We present the first method capable of photorealistically reconstructing a non-rigidly-->
-<!--            deforming scene using photos/videos captured casually from mobile phones.-->
-<!--          </p>-->
-<!--          <p>-->
-<!--            Our approach augments neural radiance fields-->
-<!--            (NeRF) by optimizing an-->
-<!--            additional continuous volumetric deformation field that warps each observed point into a-->
-<!--            canonical 5D NeRF.-->
-<!--            We observe that these NeRF-like deformation fields are prone to local minima, and-->
-<!--            propose a coarse-to-fine optimization method for coordinate-based models that allows for-->
-<!--            more robust optimization.-->
-<!--            By adapting principles from geometry processing and physical simulation to NeRF-like-->
-<!--            models, we propose an elastic regularization of the deformation field that further-->
-<!--            improves robustness.-->
-<!--          </p>-->
-<!--          <p>-->
-<!--            We show that <span class="dnerf">Nerfies</span> can turn casually captured selfie-->
-<!--            photos/videos into deformable NeRF-->
-<!--            models that allow for photorealistic renderings of the subject from arbitrary-->
-<!--            viewpoints, which we dub <i>"nerfies"</i>. We evaluate our method by collecting data-->
-<!--            using a-->
-<!--            rig with two mobile phones that take time-synchronized photos, yielding train/validation-->
-<!--            images of the same pose at different viewpoints. We show that our method faithfully-->
-<!--            reconstructs non-rigidly deforming scenes and reproduces unseen views with high-->
-<!--            fidelity.-->
-<!--          </p>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    &lt;!&ndash;/ Abstract. &ndash;&gt;-->
-
-<!--    &lt;!&ndash; Paper video. &ndash;&gt;-->
-<!--&lt;!&ndash;    <div class="columns is-centered has-text-centered">&ndash;&gt;-->
-<!--&lt;!&ndash;      <div class="column is-four-fifths">&ndash;&gt;-->
-<!--&lt;!&ndash;        <h2 class="title is-3">Video</h2>&ndash;&gt;-->
-<!--&lt;!&ndash;        <div class="publication-video">&ndash;&gt;-->
-<!--&lt;!&ndash;          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"&ndash;&gt;-->
-<!--&lt;!&ndash;                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>&ndash;&gt;-->
-<!--&lt;!&ndash;        </div>&ndash;&gt;-->
-<!--&lt;!&ndash;      </div>&ndash;&gt;-->
-<!--&lt;!&ndash;    </div>&ndash;&gt;-->
-<!--    &lt;!&ndash;/ Paper video. &ndash;&gt;-->
-<!--  </div>-->
-<!--</section>-->
-
-
-<!--<section class="section">-->
-<!--  <div class="container is-max-desktop">-->
-
-<!--    &lt;!&ndash;    <div class="columns is-centered">&ndash;&gt;-->
-
-<!--      &lt;!&ndash; Visual Effects. &ndash;&gt;-->
-<!--        &lt;!&ndash;      <div class="column">&ndash;&gt;-->
-<!--        &lt;!&ndash;        <div class="content">&ndash;&gt;-->
-<!--        &lt;!&ndash;          <h2 class="title is-3">Visual Effects</h2>&ndash;&gt;-->
-<!--        &lt;!&ndash;          <p>&ndash;&gt;-->
-<!--        &lt;!&ndash;            Using <i>nerfies</i> you can create fun visual effects. This Dolly zoom effect&ndash;&gt;-->
-<!--        &lt;!&ndash;            would be impossible without nerfies since it would require going through a wall.&ndash;&gt;-->
-<!--        &lt;!&ndash;          </p>&ndash;&gt;-->
-<!--        &lt;!&ndash;          <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">&ndash;&gt;-->
-<!--        &lt;!&ndash;            <source src="./static/videos/dollyzoom-stacked.mp4"&ndash;&gt;-->
-<!--        &lt;!&ndash;                    type="video/mp4">&ndash;&gt;-->
-<!--        &lt;!&ndash;          </video>&ndash;&gt;-->
-<!--        &lt;!&ndash;        </div>&ndash;&gt;-->
-<!--        &lt;!&ndash;      </div>&ndash;&gt;-->
-<!--      &lt;!&ndash;/ Visual Effects. &ndash;&gt;-->
-
-<!--      &lt;!&ndash; Matting. &ndash;&gt;-->
-<!--        &lt;!&ndash;      <div class="column">&ndash;&gt;-->
-<!--        &lt;!&ndash;        <h2 class="title is-3">Matting</h2>&ndash;&gt;-->
-<!--        &lt;!&ndash;        <div class="columns is-centered">&ndash;&gt;-->
-<!--        &lt;!&ndash;          <div class="column content">&ndash;&gt;-->
-<!--        &lt;!&ndash;            <p>&ndash;&gt;-->
-<!--        &lt;!&ndash;              As a byproduct of our method, we can also solve the matting problem by ignoring&ndash;&gt;-->
-<!--        &lt;!&ndash;              samples that fall outside of a bounding box during rendering.&ndash;&gt;-->
-<!--        &lt;!&ndash;            </p>&ndash;&gt;-->
-<!--        &lt;!&ndash;            <video id="matting-video" controls playsinline height="100%">&ndash;&gt;-->
-<!--        &lt;!&ndash;              <source src="./static/videos/matting.mp4"&ndash;&gt;-->
-<!--        &lt;!&ndash;                      type="video/mp4">&ndash;&gt;-->
-<!--        &lt;!&ndash;            </video>&ndash;&gt;-->
-<!--        &lt;!&ndash;          </div>&ndash;&gt;-->
-
-<!--        &lt;!&ndash;        </div>&ndash;&gt;-->
-<!--        &lt;!&ndash;      </div>&ndash;&gt;-->
-<!--        &lt;!&ndash;    </div>&ndash;&gt;-->
-<!--    &lt;!&ndash;/ Matting. &ndash;&gt;-->
-
-<!--    &lt;!&ndash; Animation. &ndash;&gt;-->
-<!--    <div class="columns is-centered">-->
-<!--      <div class="column is-full-width">-->
-<!--        <h2 class="title is-3">Animation</h2>-->
-
-<!--        &lt;!&ndash; Interpolating. &ndash;&gt;-->
-<!--        <h3 class="title is-4">Interpolating states</h3>-->
-<!--        <div class="content has-text-justified">-->
-<!--          <p>-->
-<!--            We can also animate the scene by interpolating the deformation latent codes of two input-->
-<!--            frames. Use the slider here to linearly interpolate between the left frame and the right-->
-<!--            frame.-->
-<!--          </p>-->
-<!--        </div>-->
-<!--        <div class="columns is-vcentered interpolation-panel">-->
-<!--          <div class="column is-3 has-text-centered">-->
-<!--            <img src="./static/images/interpolate_start.jpg"-->
-<!--                 class="interpolation-image"-->
-<!--                 alt="Interpolate start reference image."/>-->
-<!--            <p>Start Frame</p>-->
-<!--          </div>-->
-<!--          <div class="column interpolation-video-column">-->
-<!--            <div id="interpolation-image-wrapper">-->
-<!--              Loading...-->
-<!--            </div>-->
-<!--            <input class="slider is-fullwidth is-large is-info"-->
-<!--                   id="interpolation-slider"-->
-<!--                   step="1" min="0" max="100" value="0" type="range">-->
-<!--          </div>-->
-<!--          <div class="column is-3 has-text-centered">-->
-<!--            <img src="./static/images/interpolate_end.jpg"-->
-<!--                 class="interpolation-image"-->
-<!--                 alt="Interpolation end reference image."/>-->
-<!--            <p class="is-bold">End Frame</p>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <br/>-->
-<!--        &lt;!&ndash;/ Interpolating. &ndash;&gt;-->
-
-<!--        &lt;!&ndash; Re-rendering. &ndash;&gt;-->
-<!--        <h3 class="title is-4">Re-rendering the input video</h3>-->
-<!--        <div class="content has-text-justified">-->
-<!--          <p>-->
-<!--            Using <span class="dnerf">Nerfies</span>, you can re-render a video from a novel-->
-<!--            viewpoint such as a stabilized camera by playing back the training deformations.-->
-<!--          </p>-->
-<!--        </div>-->
-<!--        <div class="content has-text-centered">-->
-<!--          <video id="replay-video"-->
-<!--                 controls-->
-<!--                 muted-->
-<!--                 preload-->
-<!--                 playsinline-->
-<!--                 width="75%">-->
-<!--            <source src="./static/videos/replay.mp4"-->
-<!--                    type="video/mp4">-->
-<!--          </video>-->
-<!--        </div>-->
-<!--        &lt;!&ndash;/ Re-rendering. &ndash;&gt;-->
-
-<!--      </div>-->
-<!--    </div>-->
-<!--    &lt;!&ndash;/ Animation. &ndash;&gt;-->
-
-
-<!--    &lt;!&ndash; Concurrent Work. &ndash;&gt;-->
-<!--        &lt;!&ndash;    <div class="columns is-centered">&ndash;&gt;-->
-<!--        &lt;!&ndash;      <div class="column is-full-width">&ndash;&gt;-->
-<!--        &lt;!&ndash;        <h2 class="title is-3">Related Links</h2>&ndash;&gt;-->
-
-<!--        &lt;!&ndash;        <div class="content has-text-justified">&ndash;&gt;-->
-<!--        &lt;!&ndash;          <p>&ndash;&gt;-->
-<!--        &lt;!&ndash;            There's a lot of excellent work that was introduced around the same time as ours.&ndash;&gt;-->
-<!--        &lt;!&ndash;          </p>&ndash;&gt;-->
-<!--        &lt;!&ndash;          <p>&ndash;&gt;-->
-<!--        &lt;!&ndash;            <a href="https://arxiv.org/abs/2104.09125">Progressive Encoding for Neural Optimization</a> introduces an idea similar to our windowed position encoding for coarse-to-fine optimization.&ndash;&gt;-->
-<!--        &lt;!&ndash;          </p>&ndash;&gt;-->
-<!--        &lt;!&ndash;          <p>&ndash;&gt;-->
-<!--        &lt;!&ndash;            <a href="https://www.albertpumarola.com/research/D-NeRF/index.html">D-NeRF</a> and <a href="https://gvv.mpi-inf.mpg.de/projects/nonrigid_nerf/">NR-NeRF</a>&ndash;&gt;-->
-<!--        &lt;!&ndash;            both use deformation fields to model non-rigid scenes.&ndash;&gt;-->
-<!--        &lt;!&ndash;          </p>&ndash;&gt;-->
-<!--        &lt;!&ndash;          <p>&ndash;&gt;-->
-<!--        &lt;!&ndash;            Some works model videos with a NeRF by directly modulating the density, such as <a href="https://video-nerf.github.io/">Video-NeRF</a>, <a href="https://www.cs.cornell.edu/~zl548/NSFF/">NSFF</a>, and <a href="https://neural-3d-video.github.io/">DyNeRF</a>&ndash;&gt;-->
-<!--        &lt;!&ndash;          </p>&ndash;&gt;-->
-<!--        &lt;!&ndash;          <p>&ndash;&gt;-->
-<!--        &lt;!&ndash;            There are probably many more by the time you are reading this. Check out <a href="https://dellaert.github.io/NeRF/">Frank Dellart's survey on recent NeRF papers</a>, and <a href="https://github.com/yenchenlin/awesome-NeRF">Yen-Chen Lin's curated list of NeRF papers</a>.&ndash;&gt;-->
-<!--        &lt;!&ndash;          </p>&ndash;&gt;-->
-<!--        &lt;!&ndash;        </div>&ndash;&gt;-->
-<!--        &lt;!&ndash;      </div>&ndash;&gt;-->
-<!--        &lt;!&ndash;    </div>&ndash;&gt;-->
-<!--    &lt;!&ndash;/ Concurrent Work. &ndash;&gt;-->
-
-<!--  </div>-->
-<!--</section>-->
-
-
-<section class="section" id="BibTeX">
-  <div class="container is-max-desktop content">
-    <h2 class="title">BibTeX</h2>
-    <pre><code>@article{park2021nerfies,
-  author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo},
-  title     = {Nerfies: Deformable Neural Radiance Fields},
-  journal   = {ICCV},
-  year      = {2021},
-}</code></pre>
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Vision-Language-Action (VLA) models empower robots to understand and execute tasks described by natural
+              language instructions. However, a key challenge lies in their ability to generalize beyond the specific
+              environments and conditions they were trained on. It is presently difficult to gain reliable insights into
+              how these models adapt to unseen conditions and scenarios, as real-world evaluation is prohibitively
+              expensive to scale and many current simulation benchmarks are saturated or lack the realism required to
+              serve as a proxy for real-world performance. To address this gap, we present REALM, a new simulation
+              environment and benchmark designed to evaluate the generalization capabilities of VLA models, with a
+              specific emphasis on establishing a strong correlation between simulated and real-world performance
+              through high-fidelity visuals and robot control alignment. Our environment offers a unified suite of 15
+              perturbation factors from 3 categories, some of which were previously unaddressed or scattered across
+              multiple benchmarks and simulation frameworks. We support 7 common manipulation skills on the DROID robot
+              platform and a highly diverse set of objects, which can be used to create hundreds of tasks. Finally, we
+              establish two task sets that form our benchmark and evaluate the <i>π₀</i>, <i>π₀</i>-FAST,
+              and GR00T N1.5 VLA models, showing that generalization and robustness remain an open challenge.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
   </div>
 </section>
 
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3 has-text-centered">Policy Evaluations</h2>
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item">
+          <video poster="https://via.placeholder.com/300x200.png?text=Video+1" id="video1" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/dummy.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="https://via.placeholder.com/300x200.png?text=Video+2" id="video2" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/dummy.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="https://via.placeholder.com/300x200.png?text=Video+3" id="video3" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/dummy.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="https://via.placeholder.com/300x200.png?text=Video+4" id="video4" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/dummy.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="https://via.placeholder.com/300x200.png?text=Video+5" id="video5" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/dummy.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="https://via.placeholder.com/300x200.png?text=Video+6" id="video6" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/dummy.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="https://via.placeholder.com/300x200.png?text=Video+7" id="video7" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/dummy.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="https://via.placeholder.com/300x200.png?text=Video+8" id="video8" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/dummy.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Perturbations. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3 has-text-centered">Perturbations</h2>
+        <div class="perturbation-container">
+          <!-- SVG and Image will be generated here -->
+        </div>
+        <div class="content has-text-centered">
+            <p id="perturbation-instruction" class="is-size-5">"pick up the spoon"</p>
+            <img src="./static/images/perturbation_descriptions.png" alt="Perturbation Descriptions" style="width: 66.67%;">
+            <p>This is a description of the perturbations shown in the figure above.</p>
+        </div>
+      </div>
+    </div>
+    <!--/ Perturbations. -->
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Real-to-Sim. -->
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3 has-text-centered">Real-to-Sim</h2>
+        <div class="content has-text-centered">
+          <img src="./static/images/real2sim.png" alt="Real-to-Sim Figure" style="width: 100%;">
+          <p>
+             <b>Sim-to-real validation of REALM</b>. Task progression is shown in the real-world (x-axis) and simulation (y-axis).
+             <b>Left</b>: We show a strong Pearson correlation (<i>r</i>) with datapoints close to identity (gray dashed line)
+             and a low Mean Maximum Rank Violation (MMRV) on 7 tasks under 5 visual and behavioral perturbations.
+             <b>Right</b>: The results are also highly correlated under individual perturbations. We observe a p-value
+             of <i>p < 0.001</i> for all settings indicating that REALM has a strong and statistically significant
+             real-to-sim alignment.
+          </p>
+          <img src="./static/images/trajectory_following.png" alt="Trajectory Following Figure" style="width: 66.67%;">
+          <p>
+            This is a placeholder description for the trajectory following figure.
+          </p>
+          <img src="./static/images/attn_maps.png" alt="Attention Maps Figure" style="width: 66.67%;">
+          <p>
+            This is a placeholder description for the attention maps figure.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Real-to-Sim. -->
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Benchmark. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3 has-text-centered">Benchmark</h2>
+        <div class="content has-text-centered">
+          <p>
+            This is a placeholder for text that will describe the benchmark. It can be used to provide details about the tasks, environments, and evaluation metrics.
+          </p>
+        </div>
+        <div class="columns is-vcentered">
+          <div class="column">
+            <img src="./static/images/overall_task.png" alt="Overall Task" style="width: 50%; display: block; margin-left: auto; margin-right: auto;">
+          </div>
+        </div>
+        <p class="has-text-centered">This is a description for the sixth row of images.</p>
+        <hr style="height:2px;border-width:0;color:lightgray;background-color:lightgray">
+        <div class="columns is-vcentered">
+          <div class="column">
+            <img src="./static/images/gen_put_green_block_in_bowl_cam2.png" alt="Benchmark Image 1">
+          </div>
+          <div class="column">
+            <img src="./static/images/put_task.png" alt="Put Task">
+          </div>
+        </div>
+        <p class="has-text-centered">This is a description for the first row of images.</p>
+        <div class="columns is-vcentered">
+          <div class="column">
+            <img src="./static/images/gen_pick_spoon_cam2.png" alt="Benchmark Image 3">
+          </div>
+          <div class="column">
+            <img src="./static/images/pick_task.png" alt="Pick Task">
+          </div>
+        </div>
+        <p class="has-text-centered">This is a description for the second row of images.</p>
+        <div class="columns is-vcentered">
+          <div class="column">
+            <img src="./static/images/gen_stack_cubes_cam3.png" alt="Benchmark Image 5">
+          </div>
+          <div class="column">
+            <img src="./static/images/stack_task.png" alt="Stack Task">
+          </div>
+        </div>
+        <p class="has-text-centered">This is a description for the third row of images.</p>
+        <div class="columns is-vcentered">
+          <div class="column">
+            <img src="./static/images/gen_push_switch_cam1.png" alt="Benchmark Image 7">
+          </div>
+          <div class="column">
+            <img src="./static/images/push_task.png" alt="Push Task">
+          </div>
+        </div>
+        <p class="has-text-centered">This is a description for the fourth row of images.</p>
+        <div class="columns is-vcentered">
+          <div class="column">
+            <img src="./static/images/gen_rotate_mug_cam1.png" alt="Benchmark Image 9">
+          </div>
+          <div class="column">
+            <img src="./static/images/rotate_task.png" alt="Rotate Task">
+          </div>
+        </div>
+        <p class="has-text-centered">This is a description for the fifth row of images.</p>
+      </div>
+    </div>
+    <!--/ Benchmark. -->
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Takeaways. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3 has-text-centered">Takeaways</h2>
+        <div class="columns is-centered">
+          <div class="column is-four-fifths">
+            <div class="content has-text-justified">
+              <p>
+                This is a placeholder for text that will appear above the list of takeaways. It can be used to provide a brief introduction to the key findings of the research.
+              </p>
+              <ol type="I">
+                <li>This is the first takeaway.</li>
+                <li>This is the second takeaway.</li>
+                <li>This is the third takeaway.</li>
+              </ol>
+              <p>
+                This is a placeholder for text that will appear below the list of takeaways. It can be used to provide additional context or to summarize the implications of the findings.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--/ Takeaways. -->
+  </div>
+</section>
 
 <footer class="footer">
   <div class="container">
@@ -466,6 +468,165 @@
     </div>
   </div>
 </footer>
+
+<script>
+  $(document).ready(function() {
+    bulmaCarousel.attach('#benchmark-carousel', {
+        slidesToScroll: 1,
+        slidesToShow: 1,
+        infinite: true,
+        autoplay: true,
+    });
+
+    const container = $('.perturbation-container');
+    const svgNS = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(svgNS, 'svg');
+    svg.setAttribute('width', '100%');
+    svg.setAttribute('height', '100%');
+    svg.setAttribute('viewBox', '0 0 800 800');
+    container.append(svg);
+
+    const categories = [
+        'Default', 'V-AUG', 'V-VIEW', 'V-SC', 'V-LIGHT', 'S-PROP', 'S-LANG', 'S-MO', 'S-AFF', 'S-INT',
+        'B-HOBJ', 'SB-NOUN', 'SB-VRB', 'VB-POSE', 'VB-MOBJ', 'VSB-NOBJ'
+    ];
+    const category_colors = {
+        'Default': '#000000', 'V': '#76C876', 'S': '#C49B7F', 'B': '#A3CCFA',
+        'VB': '#45CACA', 'SB': '#C298FF', 'VSB': '#646464'
+    };
+    const numSegments = categories.length;
+    const cx = 400;
+    const cy = 400;
+    const outerRadius = 304;
+    const innerRadius = 264;
+    const labelRadius = outerRadius + 40;
+    const image_files = [
+        'gen_Default.png', 'gen_V-AUG.png', 'gen_V-VIEW.png', 'gen_V-SC.png', 'gen_V-LIGHT.png', 'gen_S-PROP.png',
+        'gen_S-LANG.png', 'gen_S-MO.png', 'gen_S-AFF.png', 'gen_S-INT.png', 'gen_B-HOBJ.png', 'gen_SB-NOUN.png',
+        'gen_SB-VRB.png', 'gen_VB-POSE.png', 'gen_VB-MOBJ.png', 'gen_VSB-NOBJ.png'
+    ]
+
+    function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+      const angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
+      return {
+        x: centerX + (radius * Math.cos(angleInRadians)),
+        y: centerY + (radius * Math.sin(angleInRadians))
+      };
+    }
+
+    function describeAnnulusSector(x, y, outerRadius, innerRadius, startAngle, endAngle) {
+      const outerArcStart = polarToCartesian(x, y, outerRadius, endAngle);
+      const outerArcEnd = polarToCartesian(x, y, outerRadius, startAngle);
+      const innerArcStart = polarToCartesian(x, y, innerRadius, startAngle);
+      const innerArcEnd = polarToCartesian(x, y, innerRadius, endAngle);
+
+      const largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
+
+      const d = [
+          "M", outerArcStart.x, outerArcStart.y,
+          "A", outerRadius, outerRadius, 0, largeArcFlag, 0, outerArcEnd.x, outerArcEnd.y,
+          "L", innerArcStart.x, innerArcStart.y,
+          "A", innerRadius, innerRadius, 0, largeArcFlag, 1, innerArcEnd.x, innerArcEnd.y,
+          "Z"
+      ].join(" ");
+
+      return d;
+    }
+
+    const angleStep = 360 / numSegments;
+    const gap = 1; // Gap in degrees
+
+    for (let i = 0; i < numSegments; i++) {
+      const startAngle = i * angleStep + gap / 2;
+      const endAngle = (i + 1) * angleStep - gap / 2;
+      const category = categories[i];
+      const prefix = category.split('-')[0];
+      const color = category_colors[prefix] || '#808080';
+
+      const path = document.createElementNS(svgNS, 'path');
+      path.setAttribute('d', describeAnnulusSector(cx, cy, outerRadius, innerRadius, startAngle, endAngle));
+      path.setAttribute('fill', color);
+      path.classList.add('perturbation-segment');
+      path.dataset.image = `./static/images/${image_files[i]}`;
+      path.dataset.angle = startAngle + (angleStep - gap) / 2;
+      path.dataset.category = category;
+
+      const labelAngle = startAngle + (angleStep - gap) / 2;
+      const labelPos = polarToCartesian(cx, cy, labelRadius, labelAngle);
+
+      const text = document.createElementNS(svgNS, 'text');
+      text.setAttribute('x', labelPos.x);
+      text.setAttribute('y', labelPos.y);
+      text.classList.add('perturbation-label');
+      text.textContent = category;
+
+      const angleDeg = labelAngle % 360;
+      if (angleDeg > 180 && angleDeg < 360) {
+          text.setAttribute('text-anchor', 'end');
+      } else if (angleDeg > 0 && angleDeg < 180) {
+          text.setAttribute('text-anchor', 'start');
+      } else {
+          text.setAttribute('text-anchor', 'middle');
+      }
+      
+      if (angleDeg > 90 && angleDeg < 270) {
+          text.setAttribute('dominant-baseline', 'middle');
+      } else {
+          text.setAttribute('dominant-baseline', 'middle');
+      }
+
+      const g = document.createElementNS(svgNS, 'g');
+      g.appendChild(path);
+      svg.appendChild(g);
+      svg.appendChild(text);
+    }
+
+    const line = document.createElementNS(svgNS, 'line');
+    line.setAttribute('id', 'perturbation-line');
+    line.setAttribute('x1', cx);
+    line.setAttribute('y1', cy);
+    svg.appendChild(line);
+
+    const image = document.createElementNS(svgNS, 'image');
+    image.setAttribute('id', 'perturbation-image');
+    const imageSize = 232;
+    image.setAttribute('x', cx - imageSize / 2);
+    image.setAttribute('y', cy - imageSize / 2);
+    image.setAttribute('width', imageSize);
+    image.setAttribute('height', imageSize);
+    image.setAttribute('href', './static/images/gen_Default.png');
+    svg.appendChild(image);
+
+    $('.perturbation-segment').on('mouseover', function() {
+        const img_path = $(this).data('image')
+        fetch(img_path)
+            .then(res => {
+                if (res.ok) {
+                    $('#perturbation-image').attr('href', img_path);
+                } else {
+                    $('#perturbation-image').attr('href', './static/images/gen_Default.png');
+                }
+            });
+        
+        const angle = $(this).data('angle');
+        const lineEnd = polarToCartesian(cx, cy, innerRadius, angle);
+        $('#perturbation-line').attr('x2', lineEnd.x).attr('y2', lineEnd.y).show();
+
+        const category = $(this).data('category');
+        if (category === 'Default') {
+            $('#perturbation-instruction').text('"pick up the spoon"');
+        } else {
+            $('#perturbation-instruction').text(`"${category} <TBA>"`);
+        }
+    });
+
+    // Set initial state
+    const defaultSegment = $('.perturbation-segment[data-category="Default"]');
+    const angle = defaultSegment.data('angle');
+    const lineEnd = polarToCartesian(cx, cy, innerRadius, angle);
+    $('#perturbation-line').attr('x2', lineEnd.x).attr('y2', lineEnd.y).show();
+  });
+</script>
 
 </body>
 </html>
