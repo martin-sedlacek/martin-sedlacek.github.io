@@ -65,10 +65,41 @@
         stroke: black;
         stroke-width: 2;
     }
+    #perturbation-instruction {
+     font-size: 1.25em;
+     font-style: italic;
+     color: black;
+    }
+    .video-gallery {
+        display: flex; /* Use Flexbox for easy layout */
+        flex-wrap: wrap; /* Allow items to wrap to the next line */
+        gap: 20px; /* Space between the videos */
+        justify-content: center; /* Center the gallery */
+        padding: 20px;
+    }
+    .video-item {
+        /* Set a fixed size for each video container if needed */
+        width: 45%;
+        max-width: 400px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow for visual separation */
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .video-item video {
+        display: block;
+        width: 100%; /* Make the video player fill its container */
+        height: auto;
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+    }
   </style>
 </head>
-<body>
 
+<body>
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
@@ -238,49 +269,59 @@
   </div>
 </section>
 
-<section class="hero is-light is-small">
+<!--section class="hero is-light is-small">
   <div class="hero-body">
     <div class="container">
       <h2 class="title is-3 has-text-centered">Policy Evaluations</h2>
       <div id="results-carousel" class="carousel results-carousel">
         <div class="item">
           <video poster="https://via.placeholder.com/300x200.png?text=Video+1" id="video1" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/dummy.mp4" type="video/mp4">
+            <source src="./static/videos/put_banana.mp4" type="video/mp4">
           </video>
         </div>
         <div class="item">
           <video poster="https://via.placeholder.com/300x200.png?text=Video+2" id="video2" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/dummy.mp4" type="video/mp4">
+            <source src="./static/videos/pick_spoon.mp4" type="video/mp4">
           </video>
         </div>
         <div class="item">
           <video poster="https://via.placeholder.com/300x200.png?text=Video+3" id="video3" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/dummy.mp4" type="video/mp4">
+            <source src="./static/videos/stack_cubes_v3.mp4" type="video/mp4">
           </video>
         </div>
         <div class="item">
           <video poster="https://via.placeholder.com/300x200.png?text=Video+4" id="video4" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/dummy.mp4" type="video/mp4">
+            <source src="./static/videos/rotate_mug_v2.mp4" type="video/mp4">
           </video>
         </div>
-        <div class="item">
-          <video poster="https://via.placeholder.com/300x200.png?text=Video+5" id="video5" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/dummy.mp4" type="video/mp4">
+      </div>
+    </div>
+  </div>
+</section-->
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3 has-text-centered">Policy Evaluations</h2>
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item has-text-centered">
+          <video autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/put_banana.mp4" type="video/mp4">
           </video>
         </div>
-        <div class="item">
-          <video poster="https://via.placeholder.com/300x200.png?text=Video+6" id="video6" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/dummy.mp4" type="video/mp4">
+        <div class="item has-text-centered">
+          <video autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/pick_spoon.mp4" type="video/mp4">
           </video>
         </div>
-        <div class="item">
-          <video poster="https://via.placeholder.com/300x200.png?text=Video+7" id="video7" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/dummy.mp4" type="video/mp4">
+        <div class="item has-text-centered">
+          <video autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/stack_cubes_v3.mp4" type="video/mp4">
           </video>
         </div>
-        <div class="item">
-          <video poster="https://via.placeholder.com/300x200.png?text=Video+8" id="video8" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/dummy.mp4" type="video/mp4">
+        <div class="item has-text-centered">
+          <video autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/rotate_mug_v2.mp4" type="video/mp4">
           </video>
         </div>
       </div>
@@ -326,11 +367,17 @@
           </p>
           <img src="./static/images/trajectory_following.png" alt="Trajectory Following Figure" style="width: 66.67%;">
           <p>
-            This is a placeholder description for the trajectory following figure.
+            Visualization of the control alignment. A trajectory replay in simulation with default robot control (left)
+            and our aligned control (right). Yellow trajectory represents the ground truth from a real robot and blue
+            is from simulation. Our control alignment results in significantly more realistic trajectory following.
           </p>
           <img src="./static/images/attn_maps.png" alt="Attention Maps Figure" style="width: 66.67%;">
           <p>
-            This is a placeholder description for the attention maps figure.
+            Attention maps from the π0 action expert. We replay the same robot trajectory solving a task in reality (top)
+            and simulation (bottom) and observe that the model largely  attends to similar patches. We compute the
+            cosine similarity between the attention maps from real and simulated images averaged over approx. 280
+            frames in the video and all layers and attention heads in the π0 action expert during the last step of the
+            flow matching process, yielding a high similarity score of 0.85/1.
           </p>
         </div>
       </div>
@@ -347,7 +394,7 @@
         <h2 class="title is-3 has-text-centered">Benchmark</h2>
         <div class="content has-text-centered">
           <p>
-            This is a placeholder for text that will describe the benchmark. It can be used to provide details about the tasks, environments, and evaluation metrics.
+            This section presents a detailed evaluation of three VLAs under 15 distinct perturbations on selected tasks from the REALM benchmark.
           </p>
         </div>
         <div class="columns is-vcentered">
@@ -355,7 +402,7 @@
             <img src="./static/images/overall_task.png" alt="Overall Task" style="width: 50%; display: block; margin-left: auto; margin-right: auto;">
           </div>
         </div>
-        <p class="has-text-centered">This is a description for the sixth row of images.</p>
+        <p class="has-text-centered">Results on 8 tasks in the REALm-base task set spanning 5 basic manipulation skills.</p>
         <hr style="height:2px;border-width:0;color:lightgray;background-color:lightgray">
         <div class="columns is-vcentered">
           <div class="column">
@@ -365,25 +412,25 @@
             <img src="./static/images/put_task.png" alt="Put Task">
           </div>
         </div>
-        <p class="has-text-centered">This is a description for the first row of images.</p>
+        <!-- p class="has-text-centered">This is a description for the first row of images.</p -->
         <div class="columns is-vcentered">
           <div class="column">
-            <img src="./static/images/gen_pick_spoon_cam2.png" alt="Benchmark Image 3">
+            <img src="./static/images/gen_pick_water_bottle_cam1.png" alt="Benchmark Image 3">
           </div>
           <div class="column">
             <img src="./static/images/pick_task.png" alt="Pick Task">
           </div>
         </div>
-        <p class="has-text-centered">This is a description for the second row of images.</p>
+        <!-- p class="has-text-centered">This is a description for the second row of images.</p -->
         <div class="columns is-vcentered">
           <div class="column">
-            <img src="./static/images/gen_stack_cubes_cam3.png" alt="Benchmark Image 5">
+            <img src="./static/images/gen_stack_cubes.png" alt="Benchmark Image 5">
           </div>
           <div class="column">
             <img src="./static/images/stack_task.png" alt="Stack Task">
           </div>
         </div>
-        <p class="has-text-centered">This is a description for the third row of images.</p>
+        <!--p class="has-text-centered">This is a description for the third row of images.</p-->
         <div class="columns is-vcentered">
           <div class="column">
             <img src="./static/images/gen_push_switch_cam1.png" alt="Benchmark Image 7">
@@ -392,7 +439,7 @@
             <img src="./static/images/push_task.png" alt="Push Task">
           </div>
         </div>
-        <p class="has-text-centered">This is a description for the fourth row of images.</p>
+        <!--p class="has-text-centered">This is a description for the fourth row of images.</p-->
         <div class="columns is-vcentered">
           <div class="column">
             <img src="./static/images/gen_rotate_mug_cam1.png" alt="Benchmark Image 9">
@@ -401,9 +448,29 @@
             <img src="./static/images/rotate_task.png" alt="Rotate Task">
           </div>
         </div>
-        <p class="has-text-centered">This is a description for the fifth row of images.</p>
+        <p class="has-text-centered">Binary success rate:</p>
       </div>
     </div>
+      <div class="columns is-vcentered">
+          <div class="column">
+            <img src="./static/images/binary_sr.png" alt="Overall Task" style="width: 80%; display: block; margin-left: auto; margin-right: auto;">
+          </div>
+      </div>
+      <p class="has-text-centered">Success Rate (y-axis) on the REALM-base and
+REALM-articulated task sets (x-axis). The Violin plots [29]
+show Bayesian posteriors of.</p>
+      <div class="columns is-vcentered">
+          <div class="column">
+            <img src="./static/images/time_to_completion.png" alt="Overall Task" style="width: 80%; display: block; margin-left: auto; margin-right: auto;">
+          </div>
+      </div>
+      <p class="has-text-centered">Time to completion. Average time to (successfully)
+complete a task for each model and task in REALM-base
+and REALM-articulated task sets. The time in seconds is
+obtained by dividing the number of timesteps in simulation
+by the control frequency (fixed), thus not accounting for
+model inference times and latency.</p>
+
     <!--/ Benchmark. -->
   </div>
 </section>
@@ -418,15 +485,45 @@
           <div class="column is-four-fifths">
             <div class="content has-text-justified">
               <p>
-                This is a placeholder for text that will appear above the list of takeaways. It can be used to provide a brief introduction to the key findings of the research.
+                In this work, we introduced REALM: a new high-fidelity
+simulation environment and benchmark for generalization
+in robotic manipulation and perform extensive real-to-sim
+validation showing that our results can serve as a good proxy
+for real-world performance. We then evaluate three VLAs
+under 15 perturbation factors and show that generalization
+and robustness is still far from solved for these models.
+Based on the extensive experiments conducted, we also
+draw the following conclusions:
               </p>
               <ol type="I">
-                <li>This is the first takeaway.</li>
-                <li>This is the second takeaway.</li>
-                <li>This is the third takeaway.</li>
+                <li>High-fidelity simulation
+with aligned robot control can serve as a valuable proxy
+for real-world performance, mitigating the issue of saturated
+simulation benchmarks.</li>
+                <li>Despite VLM backbones pretrained
+on Internet-scale data, there is a noticeable drop in
+performance from purely semantic perturbations, especially
+in spatial reasoning.</li>
+                <li>There is still a noticeable sensitivity
+to camera view for all models despite the unusually high
+diversity of viewpoints in the DROID dataset.</li>
+                <li>Behavioral
+generalization across objects and their properties is the most
+challenging for all tested models.</li>
+                <li>Conversely, all tested
+models seem to generalize well across known skills when
+the manipulated object remains the same.</li>
+                <li>Reliability
+and robustness, especially under perturbations, is still highly
+challenging and models still exhibit very low success rates
+on many basic manipulation tasks.</li>
               </ol>
               <p>
-                This is a placeholder for text that will appear below the list of takeaways. It can be used to provide additional context or to summarize the implications of the findings.
+                While we recognize the tremendous progress that enabled
+VLAs to start performing manipulation tasks in unseen
+settings, including many scenes in our simulation, we believe
+these results strongly indicate that current models still lack
+the capabilities for any autonomous real-world deployment.
               </p>
             </div>
           </div>
@@ -472,8 +569,8 @@
 <script>
   $(document).ready(function() {
     bulmaCarousel.attach('#benchmark-carousel', {
-        slidesToScroll: 1,
-        slidesToShow: 1,
+        slidesToScroll: 2,
+        slidesToShow: 5,
         infinite: true,
         autoplay: true,
     });
