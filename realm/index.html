@@ -32,7 +32,7 @@
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%99%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;">
+  <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20128%20128%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%99%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
@@ -710,10 +710,26 @@ the capabilities for any autonomous real-world deployment.
         $('#perturbation-line').attr('x2', lineEnd.x).attr('y2', lineEnd.y).show();
 
         const category = $(this).data('category');
-        if (category === 'Default') {
-            $('#perturbation-instruction').text('"pick up the spoon"');
+        if (category === 'S-LANG') {
+            $('#perturbation-instruction').text('"Get hold of the spoon."');
+        } else if (category === 'S-AFF') {
+            $('#perturbation-instruction').text('"Ready the utensil for eating."');
+        } else if (category === 'S-INT') {
+            $('#perturbation-instruction').text('"Pick up the object typically made of metal."');
+        } else if (category === 'S-PROP') {
+            $('#perturbation-instruction').text('"Grasp the silver utensil."');
+        } else if (category === 'S-MO') {
+            $('#perturbation-instruction').text('"Pick up the spoon next to the white plate."');
+        } else if (category === 'SB-NOUN') {
+            $('#perturbation-instruction').text('"Pick up the soda can"');
+        } else if (category === 'SB-VRB') {
+            $('#perturbation-instruction').text('"Rotate the spoon"');
+        } else if (category === 'VB-MOBJ') {
+            $('#perturbation-instruction').text('"Pick up the spoon"');
+        } else if (category === 'VSB-NOBJ') {
+            $('#perturbation-instruction').text('"Pick up the <new object>"');
         } else {
-            $('#perturbation-instruction').text(`"${category} <TBA>"`);
+            $('#perturbation-instruction').text('"Pick up the spoon."');
         }
     });
 
