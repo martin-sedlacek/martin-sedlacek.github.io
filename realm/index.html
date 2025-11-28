@@ -335,13 +335,13 @@
     <div class="columns is-centered">
       <div class="column is-full-width">
         <h2 class="title is-3 has-text-centered">Perturbations</h2>
-        <div class="content has-text-centered">
+        <!--div class="content has-text-centered">
             <p style="font-size:18px">
                 <b style="color:red;">!!! Sadly, we currently cannot show you the rendered images for some visual
                     perturbations in the demo below - our GPU cluster died prior to the workshop and is still out of order. !!!
                 </b>
             </p>
-        </div>
+        </div-->
         <div class="perturbation-container">
           <!-- SVG and Image will be generated here -->
         </div>
@@ -733,7 +733,7 @@ the capabilities for any autonomous real-world deployment.
         } else if (category === 'VB-MOBJ') {
             $('#perturbation-instruction').text('"Pick up the spoon."');
         } else if (category === 'VSB-NOBJ') {
-            $('#perturbation-instruction').text('"Pick up the <new object>"');
+            $('#perturbation-instruction').text('"Pick up the **new object**"');
         } else {
             $('#perturbation-instruction').text('"Pick up the spoon."');
         }
