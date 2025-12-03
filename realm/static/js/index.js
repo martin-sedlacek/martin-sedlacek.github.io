@@ -34,7 +34,7 @@ $(document).ready(function() {
 			slidesToShow: 1,
 			loop: false,
 			infinite: true,
-			autoplay: true,
+			autoplay: false,
 			autoplaySpeed: 3000,
     }
 
