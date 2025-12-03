@@ -43,7 +43,7 @@
   <style>
     .perturbation-container {
       position: relative;
-      width: 800px;
+      width: 900px;
       height: 800px;
       margin: 50px auto;
     }
@@ -350,7 +350,7 @@
         </div-->
         <div class="perturbation-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
           <!-- SVG and Image will be generated here -->
-          <p id="perturbation-instruction" class="is-size-5" style="position: absolute; bottom: 270px;">"Pick up the spoon."</p>
+          <p id="perturbation-instruction" class="is-size-5" style="position: absolute; bottom: 250px;">"Pick up the spoon."</p>
         </div>
         <div class="content has-text-centered">
             <img src="./static/images/perturbation_descriptions.png" alt="Perturbation Descriptions" style="width: 66.67%;">
@@ -630,7 +630,7 @@ the capabilities for any autonomous real-world deployment.
     const svg = document.createElementNS(svgNS, 'svg');
     svg.setAttribute('width', '100%');
     svg.setAttribute('height', '100%');
-    svg.setAttribute('viewBox', '0 0 800 800');
+    svg.setAttribute('viewBox', '0 0 900 800');
     container.append(svg);
 
     const categories = [
@@ -642,7 +642,7 @@ the capabilities for any autonomous real-world deployment.
         'VB': '#45CACA', 'SB': '#C298FF', 'VSB': '#646464'
     };
     const numSegments = categories.length;
-    const cx = 400;
+    const cx = 450;
     const cy = 400;
     const outerRadius = 304;
     const innerRadius = 264;
@@ -736,7 +736,7 @@ the capabilities for any autonomous real-world deployment.
 
     const image = document.createElementNS(svgNS, 'image');
     image.setAttribute('id', 'perturbation-image');
-    const imageSize = 290;
+    const imageSize = 319;
     image.setAttribute('x', cx - imageSize / 2);
     image.setAttribute('y', cy - imageSize / 2);
     image.setAttribute('width', imageSize);
