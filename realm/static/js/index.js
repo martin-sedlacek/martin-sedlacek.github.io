@@ -32,7 +32,7 @@ $(document).ready(function() {
     var options = {
 			slidesToScroll: 1,
 			slidesToShow: 1,
-			loop: true,
+			loop: false,
 			infinite: true,
 			autoplay: true,
 			autoplaySpeed: 3000,
