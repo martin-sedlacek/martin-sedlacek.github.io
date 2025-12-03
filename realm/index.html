@@ -32,8 +32,8 @@
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20128%20128%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%99%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;">
-
+  <!--link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20128%20128%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%99%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;"-->
+  <link rel="shortcut icon" type="image/x-icon" href="/realm/static/images/realm_logo.png">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
@@ -125,6 +125,9 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
+            <div style="text-align: center;">
+                <img src="/realm/static/images/realm_logo.png" alt="logo" style="width: 200px; margin-bottom: 1rem;"/>
+            </div>
           <h1 class="title is-1 publication-title">REALM: A Real-to-Sim Aligned Benchmark for Generalization in Robotic Manipulation</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
@@ -302,7 +305,7 @@
 <section class="hero is-light is-small">
   <div class="hero-body">
     <div class="container">
-      <h2 class="title is-3 has-text-centered">Policy Evaluations</h2>
+      <h2 class="title is-3 has-text-centered">Example Policy Evaluations</h2>
       <div id="results-carousel" class="carousel results-carousel">
         <div class="item has-text-centered">
           <video autoplay controls muted loop playsinline height="100%">
@@ -344,7 +347,7 @@
         </div-->
         <div class="perturbation-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
           <!-- SVG and Image will be generated here -->
-          <p id="perturbation-instruction" class="is-size-5" style="position: absolute; bottom: 220px;">"Pick up the spoon."</p>
+          <p id="perturbation-instruction" class="is-size-5" style="position: absolute; bottom: 270px;">"Pick up the spoon."</p>
         </div>
         <div class="content has-text-centered">
             <img src="./static/images/perturbation_descriptions.png" alt="Perturbation Descriptions" style="width: 66.67%;">
@@ -361,7 +364,7 @@
     <!-- Real-to-Sim. -->
     <div class="columns is-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3 has-text-centered">Real-to-Sim</h2>
+        <h2 class="title is-3 has-text-centered">Real-to-Sim Validation</h2>
         <div class="content has-text-centered">
           <img src="./static/images/real2sim.png" alt="Real-to-Sim Figure" style="width: 100%;">
           <p>
@@ -369,8 +372,8 @@
              <b>Left</b>: We show a strong Pearson correlation (<i>r</i>) with datapoints close to identity (gray dashed line)
              and a low Mean Maximum Rank Violation (MMRV) on 7 tasks under 5 visual and behavioral perturbations.
              <b>Right</b>: The results are also highly correlated under individual perturbations. We observe a p-value
-             of <i>p < 0.001</i> for all settings indicating that REALM has a strong and statistically significant
-             real-to-sim alignment.
+             of <i>p < 0.001</i> between real and simulated rollouts for all settings indicating that REALM is a strong
+              proxy for real-world performance.
           </p>
           <img src="./static/images/trajectory_following.png" alt="Trajectory Following Figure" style="width: 66.67%;">
           <p>
@@ -406,64 +409,102 @@
         </div>
         <div class="columns is-vcentered">
           <div class="column">
-            <img src="./static/images/overall_task.png" alt="Overall Task" style="width: 50%; display: block; margin-left: auto; margin-right: auto;">
+            <img src="./static/images/res_overall.png" alt="Overall Task" style="width: 50%; display: block; margin-left: auto; margin-right: auto;">
           </div>
         </div>
         <p class="has-text-centered">Results on 8 tasks in the REALm-base task set spanning 5 basic manipulation skills.</p>
         <hr style="height:2px;border-width:0;color:lightgray;background-color:lightgray">
+        <h3 class="title is-3 has-text-centered">"Put the green block in the bowl"</h3>
         <div class="columns is-vcentered">
           <div class="column">
-            <img src="./static/images/gen_put_green_block_in_bowl_cam2.png" alt="Benchmark Image 1">
+            <img src="./static/images/put_block.png" alt="Benchmark Image 1">
           </div>
           <div class="column">
-            <img src="./static/images/put_task.png" alt="Put Task">
+            <img src="./static/images/res_put_block_into_bowl.png" alt="Put Task">
           </div>
         </div>
         <!-- p class="has-text-centered">This is a description for the first row of images.</p -->
+        <h3 class="title is-3 has-text-centered">"Put the banana in the box"</h3>
         <div class="columns is-vcentered">
           <div class="column">
-            <img src="./static/images/gen_pick_water_bottle_cam1.png" alt="Benchmark Image 3">
+            <img src="./static/images/put_banana.png" alt="Benchmark Image 1">
           </div>
           <div class="column">
-            <img src="./static/images/pick_task.png" alt="Pick Task">
+            <img src="./static/images/res_put_banana_into_box.png" alt="Put Task">
           </div>
         </div>
-        <!-- p class="has-text-centered">This is a description for the second row of images.</p -->
+
+        <!-- p class="has-text-centered">This is a description for the first row of images.</p -->
+        <h3 class="title is-3 has-text-centered">"Rotate the marker"</h3>
         <div class="columns is-vcentered">
           <div class="column">
-            <img src="./static/images/gen_stack_cubes.png" alt="Benchmark Image 5">
+            <img src="./static/images/rotate_marker.png" alt="Benchmark Image 1">
           </div>
           <div class="column">
-            <img src="./static/images/stack_task.png" alt="Stack Task">
+            <img src="./static/images/res_rotate_marker.png" alt="Put Task">
           </div>
         </div>
+
         <!--p class="has-text-centered">This is a description for the third row of images.</p-->
-        <div class="columns is-vcentered">
-          <div class="column">
-            <img src="./static/images/gen_push_switch_cam1.png" alt="Benchmark Image 7">
-          </div>
-          <div class="column">
-            <img src="./static/images/push_task.png" alt="Push Task">
-          </div>
-        </div>
-        <!--p class="has-text-centered">This is a description for the fourth row of images.</p-->
+        <h3 class="title is-3 has-text-centered">"Rotate the mug"</h3>
         <div class="columns is-vcentered">
           <div class="column">
             <img src="./static/images/gen_rotate_mug_cam1.png" alt="Benchmark Image 9">
           </div>
           <div class="column">
-            <img src="./static/images/rotate_task.png" alt="Rotate Task">
+            <img src="./static/images/res_rotate_mug.png" alt="Rotate Task">
           </div>
         </div>
-        <p class="has-text-centered">Binary success rate:</p>
+        <!-- p class="has-text-centered">This is a description for the first row of images.</p -->
+        <h3 class="title is-3 has-text-centered">"Pick up the spoon"</h3>
+        <div class="columns is-vcentered">
+          <div class="column">
+            <img src="./static/images/pick_spoon.png" alt="Benchmark Image 3">
+          </div>
+          <div class="column">
+            <img src="./static/images/res_pick_spoon.png" alt="Pick Task">
+          </div>
+        </div>
+
+        <!-- p class="has-text-centered">This is a description for the first row of images.</p -->
+        <h3 class="title is-3 has-text-centered">"Pick up the water bottle"</h3>
+        <div class="columns is-vcentered">
+          <div class="column">
+            <img src="./static/images/gen_pick_water_bottle_cam1.png" alt="Benchmark Image 3">
+          </div>
+          <div class="column">
+            <img src="./static/images/res_pick_water_bottle.png" alt="Pick Task">
+          </div>
+        </div>
+          <!-- p class="has-text-centered">This is a description for the second row of images.</p -->
+        <h3 class="title is-3 has-text-centered">"Stack the green block on top of the yellow block"</h3>
+        <div class="columns is-vcentered">
+          <div class="column">
+            <img src="./static/images/gen_stack_cubes.png" alt="Benchmark Image 5">
+          </div>
+          <div class="column">
+            <img src="./static/images/res_stack_cubes.png" alt="Stack Task">
+          </div>
+        </div>
+        <!--p class="has-text-centered">This is a description for the fourth row of images.</p-->
+        <h3 class="title is-3 has-text-centered">"Push the switch"</h3>
+        <div class="columns is-vcentered">
+          <div class="column">
+            <img src="./static/images/gen_push_switch_cam1.png" alt="Benchmark Image 7">
+          </div>
+          <div class="column">
+            <img src="static/images/res_push_switch.png" alt="Push Task">
+          </div>
+        </div>
       </div>
     </div>
+      <hr style="height:2px;border-width:0;color:lightgray;background-color:lightgray">
       <div class="columns is-vcentered">
           <div class="column">
             <img src="./static/images/binary_sr.png" alt="Overall Task" style="width: 80%; display: block; margin-left: auto; margin-right: auto;">
           </div>
       </div>
-      <p class="has-text-centered">Success Rate (y-axis) on the REALM-base task set (x-axis). The Violin plots [29]
+      <p class="has-text-centered">Success Rate (y-axis) on the REALM-base task set (x-axis). The Violin plots
 show Bayesian posteriors of success rates under a uniform
 Beta prior and the observed data.</p>
       <div class="columns is-vcentered">
@@ -692,7 +733,7 @@ the capabilities for any autonomous real-world deployment.
 
     const image = document.createElementNS(svgNS, 'image');
     image.setAttribute('id', 'perturbation-image');
-    const imageSize = 232;
+    const imageSize = 290;
     image.setAttribute('x', cx - imageSize / 2);
     image.setAttribute('y', cy - imageSize / 2);
     image.setAttribute('width', imageSize);
