@@ -43,8 +43,10 @@
   <style>
     .perturbation-container {
       position: relative;
-      width: 900px;
-      height: 800px;
+      width: 100%;
+      max-width: 900px;
+      height: auto;
+      aspect-ratio: 900 / 800;
       margin: 50px auto;
     }
     .perturbation-segment {
@@ -98,6 +100,11 @@
     }
     .section-links .button {
       font-weight: bold;
+    }
+    @media screen and (max-width: 768px) {
+      .perturbation-label {
+        font-size: 12px;
+      }
     }
   </style>
 </head>
@@ -422,7 +429,7 @@ the capabilities for autonomous real-world deployment.
         <p style="color: red; text-align: center;"><i>Try hovering over the colored segments in the wheel below to see examples of how the scene can change!</i></p>
         <div class="perturbation-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
           <!-- SVG and Image will be generated here -->
-          <p id="perturbation-instruction" class="is-size-5" style="position: absolute; bottom: 250px;">"Pick up the spoon."</p>
+          <p id="perturbation-instruction" class="is-size-5" style="position: absolute; bottom: 31.25%;">"Pick up the spoon."</p>
         </div>
         <div class="content has-text-centered">
             <img src="./static/images/perturbation_descriptions.png" alt="Perturbation Descriptions" style="width: 66.67%;">
