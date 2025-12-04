@@ -275,6 +275,54 @@
   </div>
 </section>
 
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Takeaways. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3 has-text-centered">Takeaways</h2>
+        <div class="columns is-centered">
+          <div class="column is-four-fifths">
+            <div class="content has-text-justified">
+              <ol type="I">
+                <li>High-fidelity simulation
+with aligned robot control can serve as a valuable proxy
+for real-world performance, mitigating the issue of saturated
+simulation benchmarks.</li>
+                <li>Despite VLM backbones pretrained
+on Internet-scale data, there is a noticeable drop in
+performance from purely semantic perturbations, especially
+in spatial reasoning.</li>
+                <li>There is still a noticeable sensitivity
+to camera view for all models despite the unusually high
+diversity of viewpoints in the DROID dataset.</li>
+                <li>Behavioral
+generalization across objects and their properties is the most
+challenging for all tested models.</li>
+                <li>Conversely, all tested
+models seem to generalize well across known skills when
+the manipulated object remains the same.</li>
+                <li>Reliability
+and robustness, especially under perturbations, is still highly
+challenging and models still exhibit very low success rates
+on many basic manipulation tasks.</li>
+              </ol>
+              <p>
+                While we recognize the tremendous progress that enabled
+VLAs to start performing manipulation tasks in unseen
+settings, including many scenes in our simulation, we believe
+these results indicate that current models still lack
+the capabilities for autonomous real-world deployment.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--/ Takeaways. -->
+  </div>
+</section>
+
 <!--section class="hero is-light is-small">
   <div class="hero-body">
     <div class="container">
@@ -344,14 +392,12 @@
         <p>To assess the robustness of VLAs under variable conditions, we implemented perturbations that change the visual,
             behavioral, and semantic properties of the tasks and environments. We adopt 14 of the 22 perturbations from the
             <a href="https://stargen-taxonomy.github.io/">&#9734;-Gen taxonomy</a> and introduce a separate 15-th V-LIGHT
-            perturbations for scene illumination.</p>
-        <!--div class="content has-text-centered">
-            <p style="font-size:18px">
-                <b style="color:red;">!!! Sadly, we currently cannot show you the rendered images for some visual
-                    perturbations in the demo below - our GPU cluster died prior to the workshop and is still out of order. !!!
-                </b>
-            </p>
-        </div-->
+            perturbations for scene illumination.
+        </p>
+        <br>
+        <h3 class="title is-3 has-text-centered">Visualizer</h3>
+        <br>
+        <p style="color: red; text-align: center;"><i>Try hovering over the colored segments in the wheel below to see examples of how the scene can change!</i></p>
         <div class="perturbation-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
           <!-- SVG and Image will be generated here -->
           <p id="perturbation-instruction" class="is-size-5" style="position: absolute; bottom: 250px;">"Pick up the spoon."</p>
@@ -408,10 +454,10 @@
     <!-- Benchmark. -->
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3 has-text-centered">Benchmark</h2>
+        <h2 class="title is-3 has-text-centered">Benchmarking Results</h2>
         <div class="content has-text-centered">
           <p>
-            This section presents a detailed evaluation of three VLAs under 15 distinct perturbations on selected tasks from the REALM benchmark.
+            This section presents a detailed evaluation of three VLAs under 15 distinct perturbations on the 8 tasks that comprise our benchmark.
           </p>
         </div>
         <div class="columns is-vcentered">
@@ -421,7 +467,7 @@
         </div>
         <p class="has-text-centered">Results on 8 tasks in the REALm-base task set spanning 5 basic manipulation skills.</p>
         <hr style="height:2px;border-width:0;color:lightgray;background-color:lightgray">
-        <h3 class="title is-3 has-text-centered">"Put the green block in the bowl"</h3>
+          <h3 class="title is-3 has-text-centered">Instruction: <i>Put the green block in the bowl</i></h3>
         <div class="columns is-vcentered">
           <div class="column">
             <img src="./static/images/put_block.png" alt="Benchmark Image 1">
@@ -431,7 +477,7 @@
           </div>
         </div>
         <!-- p class="has-text-centered">This is a description for the first row of images.</p -->
-        <h3 class="title is-3 has-text-centered">"Put the banana in the box"</h3>
+        <h3 class="title is-3 has-text-centered">Instruction: <i>Put the banana in the box</i></h3>
         <div class="columns is-vcentered">
           <div class="column">
             <img src="./static/images/put_banana.png" alt="Benchmark Image 1">
@@ -442,7 +488,7 @@
         </div>
 
         <!-- p class="has-text-centered">This is a description for the first row of images.</p -->
-        <h3 class="title is-3 has-text-centered">"Rotate the marker"</h3>
+        <h3 class="title is-3 has-text-centered">Instruction: <i>Rotate the marker</i></h3>
         <div class="columns is-vcentered">
           <div class="column">
             <img src="./static/images/rotate_marker.png" alt="Benchmark Image 1">
@@ -453,7 +499,7 @@
         </div>
 
         <!--p class="has-text-centered">This is a description for the third row of images.</p-->
-        <h3 class="title is-3 has-text-centered">"Rotate the mug"</h3>
+        <h3 class="title is-3 has-text-centered">Instruction: <i>Rotate the mug</i></h3>
         <div class="columns is-vcentered">
           <div class="column">
             <img src="./static/images/gen_rotate_mug_cam1.png" alt="Benchmark Image 9">
@@ -463,7 +509,7 @@
           </div>
         </div>
         <!-- p class="has-text-centered">This is a description for the first row of images.</p -->
-        <h3 class="title is-3 has-text-centered">"Pick up the spoon"</h3>
+        <h3 class="title is-3 has-text-centered">Instruction: <i>Pick up the spoon</i></h3>
         <div class="columns is-vcentered">
           <div class="column">
             <img src="./static/images/pick_spoon.png" alt="Benchmark Image 3">
@@ -474,7 +520,7 @@
         </div>
 
         <!-- p class="has-text-centered">This is a description for the first row of images.</p -->
-        <h3 class="title is-3 has-text-centered">"Pick up the water bottle"</h3>
+        <h3 class="title is-3 has-text-centered">Instruction: <i>Pick up the water bottle</i></h3>
         <div class="columns is-vcentered">
           <div class="column">
             <img src="./static/images/gen_pick_water_bottle_cam1.png" alt="Benchmark Image 3">
@@ -484,7 +530,7 @@
           </div>
         </div>
           <!-- p class="has-text-centered">This is a description for the second row of images.</p -->
-        <h3 class="title is-3 has-text-centered">"Stack the green block on top of the yellow block"</h3>
+        <h3 class="title is-3 has-text-centered">Instruction: <i>Stack the green block on top of the yellow block</i></h3>
         <div class="columns is-vcentered">
           <div class="column">
             <img src="./static/images/gen_stack_cubes.png" alt="Benchmark Image 5">
@@ -494,7 +540,7 @@
           </div>
         </div>
         <!--p class="has-text-centered">This is a description for the fourth row of images.</p-->
-        <h3 class="title is-3 has-text-centered">"Push the switch"</h3>
+        <h3 class="title is-3 has-text-centered">Instruction: <i>Push the switch</i></h3>
         <div class="columns is-vcentered">
           <div class="column">
             <img src="./static/images/gen_push_switch_cam1.png" alt="Benchmark Image 7">
@@ -520,71 +566,13 @@ Beta prior and the observed data.</p>
           </div>
       </div>
       <p class="has-text-centered">Time to completion. Average time to (successfully)
-complete a task for each model and task in REALM-base task set. The time in seconds is
-obtained by dividing the number of timesteps in simulation
-by the control frequency (fixed), thus not accounting for
-model inference times and latency.</p>
+        complete a task for each model and task in REALM-base task set. The time in seconds is
+        obtained by dividing the number of timesteps in simulation
+        by the control frequency (fixed), thus not accounting for
+        model inference times and latency.
+      </p>
 
     <!--/ Benchmark. -->
-  </div>
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <!-- Takeaways. -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3 has-text-centered">Takeaways</h2>
-        <div class="columns is-centered">
-          <div class="column is-four-fifths">
-            <div class="content has-text-justified">
-              <p>
-                In this work, we introduced REALM: a new high-fidelity
-simulation environment and benchmark for generalization
-in robotic manipulation and perform extensive real-to-sim
-validation showing that our results can serve as a good proxy
-for real-world performance. We then evaluate three VLAs
-under 15 perturbation factors and show that generalization
-and robustness is still far from solved for these models.
-Based on the extensive experiments conducted, we also
-draw the following conclusions:
-              </p>
-              <ol type="I">
-                <li>High-fidelity simulation
-with aligned robot control can serve as a valuable proxy
-for real-world performance, mitigating the issue of saturated
-simulation benchmarks.</li>
-                <li>Despite VLM backbones pretrained
-on Internet-scale data, there is a noticeable drop in
-performance from purely semantic perturbations, especially
-in spatial reasoning.</li>
-                <li>There is still a noticeable sensitivity
-to camera view for all models despite the unusually high
-diversity of viewpoints in the DROID dataset.</li>
-                <li>Behavioral
-generalization across objects and their properties is the most
-challenging for all tested models.</li>
-                <li>Conversely, all tested
-models seem to generalize well across known skills when
-the manipulated object remains the same.</li>
-                <li>Reliability
-and robustness, especially under perturbations, is still highly
-challenging and models still exhibit very low success rates
-on many basic manipulation tasks.</li>
-              </ol>
-              <p>
-                While we recognize the tremendous progress that enabled
-VLAs to start performing manipulation tasks in unseen
-settings, including many scenes in our simulation, we believe
-these results strongly indicate that current models still lack
-the capabilities for any autonomous real-world deployment.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--/ Takeaways. -->
   </div>
 </section>
 
