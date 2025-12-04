@@ -96,6 +96,9 @@
         text-align: center;
         color: #333;
     }
+    .section-links .button {
+      font-weight: bold;
+    }
   </style>
 </head>
 
@@ -160,6 +163,20 @@
             <span class="author-block">
               <a href="">Vladimir Petrik</a><sup>1</sup>
             </span -->
+          </div>
+
+          <div class="section-links" style="margin-top: 1rem; margin-bottom: 1rem;">
+            <div>
+              <a href="#overview" class="button is-light">Overview</a>
+              <a href="#abstract" class="button is-light">Abstract</a>
+              <a href="#takeaways" class="button is-light">Takeaways</a>
+              <a href="#evaluations" class="button is-light">Example Evaluations</a>
+              <a href="#perturbations" class="button is-light">Perturbations</a>
+            </div>
+            <div style="margin-top: 0.5rem;">
+              <a href="#real-to-sim" class="button is-light">Real-to-Sim Validation</a>
+              <a href="#benchmark" class="button is-light">Benchmark Results</a>
+            </div>
           </div>
 
           <!-- div class="is-size-5 publication-authors">
@@ -233,7 +250,7 @@
     <!-- Overview. -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Overview</h2>
+        <h2 id="overview" class="title is-3">Overview</h2>
         <div class="content has-text-justified">
           <p>
             <img src="./static/images/poster_teaser.png" alt="Overview Figure">
@@ -250,23 +267,28 @@
     <!-- Abstract. -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
+        <h2 id="abstract" class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Vision-Language-Action (VLA) models empower robots to understand and execute tasks described by natural
-              language instructions. However, a key challenge lies in their ability to generalize beyond the specific
-              environments and conditions they were trained on. It is presently difficult to gain reliable insights into
-              how these models adapt to unseen conditions and scenarios, as real-world evaluation is prohibitively
-              expensive to scale and many current simulation benchmarks are saturated or lack the realism required to
-              serve as a proxy for real-world performance. To address this gap, we present REALM, a new simulation
-              environment and benchmark designed to evaluate the generalization capabilities of VLA models, with a
-              specific emphasis on establishing a strong correlation between simulated and real-world performance
-              through high-fidelity visuals and robot control alignment. Our environment offers a unified suite of 15
-              perturbation factors from 3 categories, some of which were previously unaddressed or scattered across
-              multiple benchmarks and simulation frameworks. We support 7 common manipulation skills on the DROID robot
-              platform and a highly diverse set of objects, which can be used to create hundreds of tasks. Finally, we
-              establish two task sets that form our benchmark and evaluate the <i>π₀</i>, <i>π₀</i>-FAST,
-              and GR00T N1.5 VLA models, showing that generalization and robustness remain an open challenge.
+            Abstract— Vision-Language-Action (VLA) models empower
+            robots to understand and execute tasks described by natural
+            language instructions. However, a key challenge lies in their
+            ability to generalize beyond the specific environments and
+            conditions they were trained on, which is presently difficult
+            and expensive to evaluate in the real-world. To address this
+            gap, we present REALM, a new simulation environment and
+            benchmark designed to evaluate the generalization capabilities
+            of VLA models, with a specific emphasis on establishing a
+            strong correlation between simulated and real-world perfor-
+            mance through high-fidelity visuals and aligned robot control.
+            Our environment offers a suite of 15 perturbation factors, 7
+            manipulation skills, and more than 4,000 objects. Finally, we
+            establish two task sets that form our benchmark and evaluate
+            the <i>π0</i>, <i>π0-FAST</i>, and <i>GR00T N1.5</i> VLA models, showing that
+            generalization and robustness remain an open challenge. More
+            broadly, we also show that simulation gives us a valuable proxy
+            for the real-world and allows us to systematically probe for and
+            quantify the weaknesses and failure modes of VLAs.
           </p>
         </div>
       </div>
@@ -280,7 +302,7 @@
     <!-- Takeaways. -->
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3 has-text-centered">Takeaways</h2>
+        <h2 id="takeaways" class="title is-3 has-text-centered">Takeaways</h2>
         <div class="columns is-centered">
           <div class="column is-four-fifths">
             <div class="content has-text-justified">
@@ -356,7 +378,7 @@ the capabilities for autonomous real-world deployment.
 <section class="hero is-light is-small">
   <div class="hero-body">
     <div class="container">
-      <h2 class="title is-3 has-text-centered">Example Policy Evaluations</h2>
+      <h2 id="evaluations" class="title is-3 has-text-centered">Example Policy Evaluations</h2>
       <div id="results-carousel" class="carousel results-carousel">
         <div class="item has-text-centered">
           <video autoplay controls muted loop playsinline height="100%">
@@ -388,7 +410,7 @@ the capabilities for autonomous real-world deployment.
     <!-- Perturbations. -->
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3 has-text-centered">Perturbations</h2>
+        <h2 id="perturbations" class="title is-3 has-text-centered">Perturbations</h2>
         <p>To assess the robustness of VLAs under variable conditions, we implemented perturbations that change the visual,
             behavioral, and semantic properties of the tasks and environments. We adopt 14 of the 22 perturbations from the
             <a href="https://stargen-taxonomy.github.io/">&#9734;-Gen taxonomy</a> and introduce a separate 15-th V-LIGHT
@@ -417,7 +439,7 @@ the capabilities for autonomous real-world deployment.
     <!-- Real-to-Sim. -->
     <div class="columns is-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3 has-text-centered">Real-to-Sim Validation</h2>
+        <h2 id="real-to-sim" class="title is-3 has-text-centered">Real-to-Sim Validation</h2>
         <div class="content has-text-centered">
           <img src="./static/images/real2sim.png" alt="Real-to-Sim Figure" style="width: 100%;">
           <p>
@@ -454,7 +476,7 @@ the capabilities for autonomous real-world deployment.
     <!-- Benchmark. -->
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3 has-text-centered">Benchmarking Results</h2>
+        <h2 id="benchmark" class="title is-3 has-text-centered">Benchmarking Results</h2>
         <div class="content has-text-centered">
           <p>
             This section presents a detailed evaluation of three VLAs under 15 distinct perturbations on the 8 tasks that comprise our benchmark.
