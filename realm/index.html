@@ -456,12 +456,14 @@ the capabilities for autonomous real-world deployment.
              of <i>p < 0.001</i> between real and simulated rollouts for all settings indicating that REALM is a strong
               proxy for real-world performance.
           </p>
+          <hr style="height:2px;border-width:0;color:lightgray;background-color:lightgray">
           <img src="./static/images/trajectory_following.png" alt="Trajectory Following Figure" style="width: 66.67%;">
           <p>
             Visualization of the control alignment. A trajectory replay in simulation with default robot control (left)
             and our aligned control (right). Yellow trajectory represents the ground truth from a real robot and blue
             is from simulation. Our control alignment results in significantly more realistic trajectory following.
           </p>
+          <hr style="height:2px;border-width:0;color:lightgray;background-color:lightgray">
           <img src="./static/images/attn_maps.png" alt="Attention Maps Figure" style="width: 66.67%;">
           <p>
             Attention maps from the π0 action expert. We replay the same robot trajectory solving a task in reality (top)
@@ -495,111 +497,136 @@ the capabilities for autonomous real-world deployment.
         </div>
         <p class="has-text-centered">Results on 8 tasks in the REALM-base task set spanning 5 basic manipulation skills.</p>
         <hr style="height:2px;border-width:0;color:lightgray;background-color:lightgray">
+        <div class="columns is-vcentered">
+            <div class="column">
+              <img src="./static/images/binary_sr.png" alt="Overall Task" style="width: 80%; display: block; margin-left: auto; margin-right: auto;">
+            </div>
+        </div>
+        <p class="has-text-centered">Success Rate (y-axis) on the REALM-base task set (x-axis). The Violin plots
+  show Bayesian posteriors of success rates under a uniform
+  Beta prior and the observed data.</p>
+        <div class="columns is-vcentered">
+            <div class="column">
+              <img src="./static/images/time_to_completion.png" alt="Overall Task" style="width: 80%; display: block; margin-left: auto; margin-right: auto;">
+            </div>
+        </div>
+        <p class="has-text-centered">Time to completion. Average time to (successfully)
+          complete a task for each model and task in REALM-base task set. The time in seconds is
+          obtained by dividing the number of timesteps in simulation
+          by the control frequency (fixed), thus not accounting for
+          model inference times and latency.
+        </p>
+        <br>
+        <br>
+        <h3 class="title is-3 has-text-centered">Individual Task Results</h3>
+        <hr style="height:2px;border-width:0;color:lightgray;background-color:lightgray">
           <h3 class="title is-3 has-text-centered">Instruction: <i>Put the green block in the bowl</i></h3>
         <div class="columns is-vcentered">
           <div class="column">
             <img src="./static/images/put_block.png" alt="Benchmark Image 1">
+            <p class="has-text-centered">Task visualization</p>
           </div>
           <div class="column">
             <img src="./static/images/res_put_block_into_bowl.png" alt="Put Task">
+            <p class="has-text-centered">Results under perturbations</p>
           </div>
         </div>
         <!-- p class="has-text-centered">This is a description for the first row of images.</p -->
+        <hr style="height:2px;border-width:0;color:lightgray;background-color:lightgray">
         <h3 class="title is-3 has-text-centered">Instruction: <i>Put the banana in the box</i></h3>
         <div class="columns is-vcentered">
           <div class="column">
             <img src="./static/images/put_banana.png" alt="Benchmark Image 1">
+            <p class="has-text-centered">Task visualization</p>
           </div>
           <div class="column">
             <img src="./static/images/res_put_banana_into_box.png" alt="Put Task">
+            <p class="has-text-centered">Results under perturbations</p>
           </div>
         </div>
 
         <!-- p class="has-text-centered">This is a description for the first row of images.</p -->
+        <hr style="height:2px;border-width:0;color:lightgray;background-color:lightgray">
         <h3 class="title is-3 has-text-centered">Instruction: <i>Rotate the marker</i></h3>
         <div class="columns is-vcentered">
           <div class="column">
             <img src="./static/images/rotate_marker.png" alt="Benchmark Image 1">
+            <p class="has-text-centered">Task visualization</p>
           </div>
           <div class="column">
             <img src="./static/images/res_rotate_marker.png" alt="Put Task">
+            <p class="has-text-centered">Results under perturbations</p>
           </div>
         </div>
 
         <!--p class="has-text-centered">This is a description for the third row of images.</p-->
+        <hr style="height:2px;border-width:0;color:lightgray;background-color:lightgray">
         <h3 class="title is-3 has-text-centered">Instruction: <i>Rotate the mug</i></h3>
         <div class="columns is-vcentered">
           <div class="column">
             <img src="./static/images/gen_rotate_mug_cam1.png" alt="Benchmark Image 9">
+            <p class="has-text-centered">Task visualization</p>
           </div>
           <div class="column">
             <img src="./static/images/res_rotate_mug.png" alt="Rotate Task">
+            <p class="has-text-centered">Results under perturbations</p>
           </div>
         </div>
         <!-- p class="has-text-centered">This is a description for the first row of images.</p -->
+        <hr style="height:2px;border-width:0;color:lightgray;background-color:lightgray">
         <h3 class="title is-3 has-text-centered">Instruction: <i>Pick up the spoon</i></h3>
         <div class="columns is-vcentered">
           <div class="column">
             <img src="./static/images/pick_spoon.png" alt="Benchmark Image 3">
+            <p class="has-text-centered">Task visualization</p>
           </div>
           <div class="column">
             <img src="./static/images/res_pick_spoon.png" alt="Pick Task">
+            <p class="has-text-centered">Results under perturbations</p>
           </div>
         </div>
 
         <!-- p class="has-text-centered">This is a description for the first row of images.</p -->
+        <hr style="height:2px;border-width:0;color:lightgray;background-color:lightgray">
         <h3 class="title is-3 has-text-centered">Instruction: <i>Pick up the water bottle</i></h3>
         <div class="columns is-vcentered">
           <div class="column">
             <img src="./static/images/gen_pick_water_bottle_cam1.png" alt="Benchmark Image 3">
+            <p class="has-text-centered">Task visualization</p>
           </div>
           <div class="column">
             <img src="./static/images/res_pick_water_bottle.png" alt="Pick Task">
+            <p class="has-text-centered">Results under perturbations</p>
           </div>
         </div>
           <!-- p class="has-text-centered">This is a description for the second row of images.</p -->
+        <hr style="height:2px;border-width:0;color:lightgray;background-color:lightgray">
         <h3 class="title is-3 has-text-centered">Instruction: <i>Stack the green block on top of the yellow block</i></h3>
         <div class="columns is-vcentered">
           <div class="column">
             <img src="./static/images/gen_stack_cubes.png" alt="Benchmark Image 5">
+            <p class="has-text-centered">Task visualization</p>
           </div>
           <div class="column">
             <img src="./static/images/res_stack_cubes.png" alt="Stack Task">
+            <p class="has-text-centered">Results under perturbations</p>
           </div>
         </div>
         <!--p class="has-text-centered">This is a description for the fourth row of images.</p-->
+        <hr style="height:2px;border-width:0;color:lightgray;background-color:lightgray">
         <h3 class="title is-3 has-text-centered">Instruction: <i>Push the switch</i></h3>
         <div class="columns is-vcentered">
           <div class="column">
             <img src="./static/images/gen_push_switch_cam1.png" alt="Benchmark Image 7">
+            <p class="has-text-centered">Task visualization</p>
           </div>
           <div class="column">
             <img src="static/images/res_push_switch.png" alt="Push Task">
+            <p class="has-text-centered">Results under perturbations</p>
           </div>
         </div>
       </div>
     </div>
-      <hr style="height:2px;border-width:0;color:lightgray;background-color:lightgray">
-      <div class="columns is-vcentered">
-          <div class="column">
-            <img src="./static/images/binary_sr.png" alt="Overall Task" style="width: 80%; display: block; margin-left: auto; margin-right: auto;">
-          </div>
-      </div>
-      <p class="has-text-centered">Success Rate (y-axis) on the REALM-base task set (x-axis). The Violin plots
-show Bayesian posteriors of success rates under a uniform
-Beta prior and the observed data.</p>
-      <div class="columns is-vcentered">
-          <div class="column">
-            <img src="./static/images/time_to_completion.png" alt="Overall Task" style="width: 80%; display: block; margin-left: auto; margin-right: auto;">
-          </div>
-      </div>
-      <p class="has-text-centered">Time to completion. Average time to (successfully)
-        complete a task for each model and task in REALM-base task set. The time in seconds is
-        obtained by dividing the number of timesteps in simulation
-        by the control frequency (fixed), thus not accounting for
-        model inference times and latency.
-      </p>
-
     <!--/ Benchmark. -->
   </div>
 </section>
