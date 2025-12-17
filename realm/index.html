@@ -174,6 +174,7 @@
 
           <div class="section-links" style="margin-top: 1rem; margin-bottom: 1rem;">
             <div>
+              <a href="#video" class="button is-light">Video</a>
               <a href="#overview" class="button is-light">Overview</a>
               <a href="#abstract" class="button is-light">Abstract</a>
               <a href="#takeaways" class="button is-light">Takeaways</a>
@@ -252,6 +253,23 @@
   </div>
 </section>
 
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <!-- Paper video. -->
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 id="video" class="title is-3">Teaser video</h2>
+          <div class="publication-video">
+            <iframe src="./static/videos/REALM.mp4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--/ Paper video. -->
+  </div>
+</section>
+
 <section class="section">
   <div class="container is-max-desktop">
     <!-- Overview. -->
@@ -260,7 +278,7 @@
         <h2 id="overview" class="title is-3">Overview</h2>
         <div class="content has-text-justified">
           <p>
-            <img src="./static/images/poster_teaser.png" alt="Overview Figure">
+            <img src="./static/images/realm_overview_fig.png" alt="Overview Figure">
             <b>REALM</b> is a large-scale realistic simulation environment and benchmark for generalization
               in robotic manipulation. It supports 7 distinct manipulation skills and stress-tests them
               against 15 perturbations. Through empirical validation, we show that evaluation results in
@@ -519,6 +537,12 @@ the capabilities for autonomous real-world deployment.
         <br>
         <br>
         <h3 class="title is-3 has-text-centered">Individual Task Results</h3>
+        <p class="has-text-centered">
+            This section presents a detailed evaluation of three VLA models under 15 distinct perturbations
+            on 10 tasks in the REALM-base and REALM-articulated task sets. On the left, we show a visualization of the
+            task, and on the right, we show the task progression on the nominal default setting (black) and under
+            individual perturbations (colored curves).
+        </p>
         <hr style="height:2px;border-width:0;color:lightgray;background-color:lightgray">
           <h3 class="title is-3 has-text-centered">Instruction: <i>Put the green block in the bowl</i></h3>
         <div class="columns is-vcentered">
@@ -622,6 +646,20 @@ the capabilities for autonomous real-world deployment.
           </div>
           <div class="column">
             <img src="static/images/res_push_switch.png" alt="Push Task">
+            <p class="has-text-centered">Results under perturbations</p>
+          </div>
+        </div>
+
+        <!--p class="has-text-centered">This is a description for the fourth row of images.</p-->
+        <hr style="height:2px;border-width:0;color:lightgray;background-color:lightgray">
+        <h3 class="title is-3 has-text-centered">Instruction: <i>Open the drawer</i></h3>
+        <div class="columns is-vcentered">
+          <div class="column">
+            <img src="./static/images/gen_open_drawer.png" alt="Benchmark Image 9">
+            <p class="has-text-centered">Task visualization</p>
+          </div>
+          <div class="column">
+            <img src="static/images/res_open_drawer.png" alt="Push Task">
             <p class="has-text-centered">Results under perturbations</p>
           </div>
         </div>
