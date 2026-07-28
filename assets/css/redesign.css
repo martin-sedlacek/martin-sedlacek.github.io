@@ -50,13 +50,13 @@ h2+h3.subhead{margin-top:18px}
    column and crop to 4:3 so every row lines up */
 .publications ol.bibliography li .preview{width:100%;min-width:0;max-width:none}
 .publications ol.bibliography li .preview picture{display:block}
-.publications ol.bibliography li .preview img{width:100%;max-width:none;height:auto;aspect-ratio:4/3;object-fit:cover;display:block}
+.publications ol.bibliography li .preview img{width:100%;max-width:none;height:auto;aspect-ratio:4/3;object-fit:contain;display:block}
 .publications ol.bibliography li.highlighted-publication{background:var(--accent-soft);border-bottom:0;border-radius:6px;margin:8px -18px;padding:24px 18px}
 html[data-theme=dark] .publications ol.bibliography li.highlighted-publication{background:var(--accent-soft)!important}
 .publications ol.bibliography .row{display:grid;grid-template-columns:150px minmax(0,1fr);gap:26px;align-items:start;margin:0}
 .publications ol.bibliography .row>*{min-width:0;max-width:none;flex:none;padding:0}
 .publications ol.bibliography figure{margin:0}
-.publications ol.bibliography .preview img{border-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,.10)}
+.publications ol.bibliography .preview img{border-radius:4px;box-shadow:none;background:transparent}
 .publications ol.bibliography li.highlighted-publication .preview img{box-shadow:none}
 .publications .title{font-family:'Roboto Slab',serif;font-weight:400;font-size:19.5px;line-height:1.32;letter-spacing:-.005em;margin-bottom:5px}
 .publications .author{font-size:15px;color:var(--ink-soft);line-height:1.5}
