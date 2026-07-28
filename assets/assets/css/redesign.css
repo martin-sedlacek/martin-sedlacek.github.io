@@ -1,0 +1,109 @@
+/* Redesign layer for the built al-folio site.
+   Loaded after main.css; overrides only. Delete this file to revert. */
+:root{--global-theme-color:#3b5dd0;--global-hover-color:#3b5dd0;--accent-soft:rgba(59,93,208,.09);--rule:#e8e8e8;--rule-soft:#f2f2f2;--ink-soft:#333}
+html[data-theme='dark']{--global-theme-color:#7f9bf0;--global-hover-color:#7f9bf0;--accent-soft:rgba(255,255,255,.06);--rule:#2f2f31;--rule-soft:#262628;--ink-soft:#c9c9c9}
+body{font-weight:300;font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased}
+p{text-wrap:pretty}
+.container{max-width:920px}
+
+/* nav */
+#navbar{background:transparent;backdrop-filter:blur(8px);box-shadow:none;border-bottom:1px solid transparent}
+#navbar.navbar-scrolled{border-bottom-color:var(--rule)}
+#navbar .navbar-brand{font-family:'Roboto Slab',serif;font-size:16px;letter-spacing:-.01em}
+#navbar .nav-link{font-size:15px;padding:5px 11px!important;border-radius:4px;transition:background .18s,color .18s}
+#navbar .nav-item:not(.active) .nav-link:hover{background:var(--accent-soft);color:var(--global-theme-color)!important}
+
+/* page header */
+.post-header{padding:56px 0 8px}
+.post-title{font-family:'Roboto Slab',serif;font-weight:300;font-size:clamp(38px,6vw,58px);line-height:1.08;letter-spacing:-.02em;margin:0 0 10px;text-transform:none}
+.desc,.post-description{font-size:19px;color:var(--global-text-color-light);margin:0}
+
+/* profile */
+.profile{width:250px;margin:6px 0 26px 34px}
+.profile img{border-radius:6px;box-shadow:0 2px 5px rgba(0,0,0,.14),0 1px 2px rgba(0,0,0,.10)}
+.profile .address{margin-top:14px;font-size:13.5px;line-height:1.55;color:var(--global-text-color-light)}
+.profile .address p{margin:0}
+
+/* section headings */
+.post h2,article>h2{font-family:'Roboto Slab',serif;font-weight:400;font-size:27px;letter-spacing:-.01em;margin:52px 0 4px;padding-bottom:8px;border-bottom:1px solid var(--rule);text-transform:capitalize}
+h3.subhead{font-family:'Roboto Slab',serif;font-weight:400;font-size:20px;letter-spacing:-.005em;color:var(--ink-soft);margin:26px 0 2px}
+h2+h3.subhead{margin-top:18px}
+
+/* news */
+.news table{width:100%;margin-top:6px}
+.news tr{border-bottom:1px solid var(--rule-soft)}
+.news tr:last-child{border-bottom:0}
+.news th{width:118px;font-weight:500;font-size:14px;white-space:nowrap;color:var(--global-text-color-light);padding:13px 16px 13px 0;vertical-align:top;font-variant-numeric:tabular-nums}
+.news td{padding:13px 0;font-size:16.5px;color:var(--ink-soft);vertical-align:top}
+
+/* publications */
+.publications{margin-top:1rem}
+.publications h2.bibliography{font-family:'Roboto Slab',serif;font-weight:400;font-size:15px;letter-spacing:.06em;text-align:left;color:var(--global-text-color-light);margin:76px 0 0!important;padding:0 0 9px!important;border-top:0;border-bottom:1px solid var(--rule)}
+.publications h2.bibliography:first-of-type{margin-top:26px!important}
+.publications h2.bibliography+ol.bibliography{margin-top:0;padding-top:6px}
+/* dividers only inside the year-grouped list on /publications/ — the selected
+   list on the about page reads better without them */
+/* Spacing lives on .row, not li: the built 2024 group puts two entries inside
+   one <li>, so li-level padding can't separate them. */
+.publications ol.bibliography li{margin-bottom:0;padding:0;border-bottom:0!important}
+.publications ol.bibliography li .row{padding:26px 0}
+.publications h2.bibliography+ol.bibliography li .row+.row{border-top:1px solid var(--rule)}
+.publications h2.bibliography+ol.bibliography li+li .row:first-child{border-top:1px solid var(--rule)}
+.publications ol.bibliography li.highlighted-publication .row{padding:0}
+/* al-folio caps the thumb at 200px and leaves images uncropped — pin the
+   column and crop to 4:3 so every row lines up */
+.publications ol.bibliography li .preview{width:100%;min-width:0;max-width:none}
+.publications ol.bibliography li .preview picture{display:block}
+.publications ol.bibliography li .preview img{width:100%;max-width:none;height:auto;aspect-ratio:4/3;object-fit:contain;display:block}
+.publications ol.bibliography li.highlighted-publication{background:var(--accent-soft);border-bottom:0;border-radius:6px;margin:8px -18px;padding:24px 18px}
+html[data-theme=dark] .publications ol.bibliography li.highlighted-publication{background:var(--accent-soft)!important}
+.publications ol.bibliography .row{display:grid;grid-template-columns:150px minmax(0,1fr);gap:26px;align-items:start;margin:0}
+.publications ol.bibliography .row>*{min-width:0;max-width:none;flex:none;padding:0}
+.publications ol.bibliography figure{margin:0}
+.publications ol.bibliography .preview img{border-radius:4px;box-shadow:none;background:transparent}
+.publications ol.bibliography li.highlighted-publication .preview img{box-shadow:none}
+.publications .title{font-family:'Roboto Slab',serif;font-weight:400;font-size:19.5px;line-height:1.32;letter-spacing:-.005em;margin-bottom:5px}
+.publications .author{font-size:15px;color:var(--ink-soft);line-height:1.5}
+.publications .author em{font-style:normal;font-weight:500;color:var(--global-text-color)}
+.publications .periodical{font-size:15px;color:var(--global-text-color-light);font-style:italic;margin-top:3px}
+.publications .periodical:empty{display:none}
+.publications .links{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.publications .links a.btn{font-size:12.5px;font-weight:400;letter-spacing:.02em;padding:4px 12px;border:1px solid var(--rule);border-radius:3px;color:var(--ink-soft);background:none;transition:all .18s}
+.publications .links a.btn:hover{background:var(--global-theme-color);border-color:var(--global-theme-color);color:#fff}
+.publications .badges{display:none}
+
+/* live metrics */
+.metrics{display:flex;flex-wrap:wrap;gap:14px;margin-top:11px;font-size:13px;color:var(--global-text-color-light);font-variant-numeric:tabular-nums}
+.metrics a.metric{display:none;align-items:center;gap:5px;color:inherit}
+.metrics a.metric.loaded{display:inline-flex}
+.metrics a.metric i{font-size:12px}
+.metrics a.metric b{font-weight:500;color:var(--ink-soft)}
+.metrics a.metric:hover,.metrics a.metric:hover b{color:var(--global-theme-color)}
+
+/* overview lists */
+ul.overview{list-style:none;margin:8px 0 0;padding:0}
+ul.overview li{display:grid;grid-template-columns:118px 1fr;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule-soft);align-items:baseline}
+ul.overview li:last-child{border-bottom:0}
+ul.overview .yr{font-size:14px;font-weight:500;color:var(--global-text-color-light);font-variant-numeric:tabular-nums}
+ul.overview .what{font-size:16.5px;color:var(--ink-soft)}
+ul.overview .what b{font-weight:500;color:var(--global-text-color)}
+ul.overview .what span{display:block;font-size:14.5px;color:var(--global-text-color-light)}
+
+/* social + footer */
+.social{margin-top:56px}
+.social .contact-icons{display:flex;justify-content:center;gap:22px;font-size:21px}
+.social .contact-icons a{color:var(--global-text-color-light);transition:color .18s,transform .18s}
+.social .contact-icons a:hover{color:var(--global-theme-color);transform:translateY(-2px)}
+footer.fixed-bottom{position:static!important;background:var(--global-bg-color);border-top:1px solid var(--rule)}
+footer.fixed-bottom .container{color:var(--global-text-color-light);font-size:13.5px;text-align:center;padding:22px 0 24px}
+footer.fixed-bottom a{color:var(--global-text-color-light)}
+footer.fixed-bottom a:hover{color:var(--global-theme-color)}
+body.fixed-top-nav{padding-bottom:0}
+
+@media(max-width:700px){
+.profile{width:180px;margin:0 auto 26px;float:none!important;text-align:center}
+.publications ol.bibliography .row{grid-template-columns:minmax(0,1fr);gap:14px}
+.publications ol.bibliography .preview{max-width:230px}
+ul.overview li{grid-template-columns:1fr;gap:2px}
+.news th{width:98px;font-size:13px}
+}
