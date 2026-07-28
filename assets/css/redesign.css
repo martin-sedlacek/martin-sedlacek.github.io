@@ -37,9 +37,16 @@ h2+h3.subhead{margin-top:18px}
 .news td{padding:13px 0;font-size:16.5px;color:var(--ink-soft);vertical-align:top}
 
 /* publications */
-.publications h2.bibliography{font-family:'Roboto Slab',serif;font-weight:400;font-size:15px;letter-spacing:.06em;color:var(--global-text-color-light);margin:38px 0 0;padding-bottom:7px;border-bottom:1px solid var(--rule)}
-.publications ol.bibliography li{padding:24px 0;border-bottom:1px solid var(--rule-soft)}
+.publications{margin-top:1rem}
+.publications h2.bibliography{font-family:'Roboto Slab',serif;font-weight:400;font-size:15px;letter-spacing:.06em;text-align:left;color:var(--global-text-color-light);margin:40px 0 0!important;padding:0 0 7px!important;border-top:0;border-bottom:1px solid var(--rule)}
+.publications h2.bibliography+ol.bibliography{margin-top:0}
+.publications ol.bibliography li{margin-bottom:0;padding:26px 0;border-bottom:1px solid var(--rule)}
 .publications ol.bibliography li:last-child{border-bottom:0}
+/* al-folio caps the thumb at 200px and leaves images uncropped — pin the
+   column and crop to 4:3 so every row lines up */
+.publications ol.bibliography li .preview{width:100%;min-width:0;max-width:none}
+.publications ol.bibliography li .preview picture{display:block}
+.publications ol.bibliography li .preview img{width:100%;max-width:none;height:auto;aspect-ratio:4/3;object-fit:cover;display:block}
 .publications ol.bibliography li.highlighted-publication{background:var(--accent-soft);border-bottom:0;border-radius:6px;margin:8px -18px;padding:24px 18px}
 html[data-theme=dark] .publications ol.bibliography li.highlighted-publication{background:var(--accent-soft)!important}
 .publications ol.bibliography .row{display:grid;grid-template-columns:150px minmax(0,1fr);gap:26px;align-items:start;margin:0}
