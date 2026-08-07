@@ -1,898 +1,618 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="description"
-        content="REALM: A Real-to-Sim Validated Benchmark for Generalization in Robotic Manipulation">
-  <meta name="keywords" content="REALM">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>REALM: A Real-to-Sim Validated Benchmark for Generalization in Robotic Manipulation</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>REALM: A Real-to-Sim Validated Benchmark for Generalization in Robotic Manipulation</title>
+<meta name="description" content="REALM: A Real-to-Sim Validated Benchmark for Generalization in Robotic Manipulation" />
+<meta name="keywords" content="REALM, VLA, robotic manipulation, benchmark, generalization, sim-to-real" />
+<link rel="shortcut icon" type="image/png" href="./static/images/realm_logo_vector.png" />
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
-    function gtag() {
-      dataLayer.push(arguments);
-    }
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PYVRSFMDRL');
+</script>
 
-    gtag('js', new Date());
+<style>
+  :root {
+    --blue: #0F5AF0;
+    --blue-dark: #0A3EAF;
+    --blue-tint: #EAF1FF;
+    --ink: #0A1020;
+    --body: #3A4256;
+    --muted: #8892A6;
+    --line: #E7EAF1;
+    --wash: #F7F9FE;
+    --night: #0A1020;
+    --sans: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+    --display: 'Space Grotesk', system-ui, sans-serif;
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+  body { margin: 0; background: #fff; color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  img { max-width: 100%; }
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { color: var(--blue-dark); text-decoration: underline; }
+  ::selection { background: #CFE0FF; }
+  .wrap { max-width: 1080px; margin: 0 auto; }
+  section { padding: 96px 32px; }
+  .eyebrow { font: 600 clamp(28px,3.4vw,42px)/1.08 var(--display); letter-spacing: -0.025em; color: var(--ink); margin-bottom: 10px; }
+  .sub { font: 500 16px/1.55 var(--sans); color: #5A6376; margin: 0 0 34px; max-width: 640px; text-wrap: pretty; }
+  .lede { font: 400 17.5px/1.75 var(--sans); color: var(--body); margin: 0 0 40px; max-width: 760px; text-wrap: pretty; }
+  figcaption { font: 400 15px/1.7 var(--sans); color: #5A6376; margin-top: 16px; text-wrap: pretty; }
+  figure { margin: 0; }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: 14px; }
+  .btn { display: inline-flex; align-items: center; gap: 9px; font: 600 15px/1 var(--sans); padding: 13px 21px; border-radius: 9px; border: 1px solid #DCE1EC; background: #fff; color: var(--ink); cursor: pointer; }
+  .btn:hover { border-color: var(--blue); color: var(--blue); text-decoration: none; }
+  .btn-primary { background: var(--blue); border-color: var(--blue); color: #fff; padding: 14px 22px; }
+  .btn-primary:hover { background: var(--blue-dark); border-color: var(--blue-dark); color: #fff; }
 
-    gtag('config', 'G-PYVRSFMDRL');
-  </script>
+  /* nav */
+  header.top { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.88); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+  .navbar { max-width: 1180px; margin: 0 auto; padding: 0 32px; height: 64px; display: flex; align-items: center; gap: 32px; }
+  .brand { display: flex; align-items: center; gap: 10px; color: var(--ink); }
+  .brand:hover { text-decoration: none; color: var(--ink); }
+  .brand img { height: 26px; }
+  .brand span { font: 700 17px/1 var(--display); letter-spacing: .02em; }
+  .navlinks { display: flex; gap: 4px; flex: 1; justify-content: center; flex-wrap: wrap; }
+  .navlinks a { font: 500 13.5px/1 var(--sans); color: #5A6376; padding: 8px 10px; border-radius: 6px; }
+  .navlinks a:hover { background: #F2F5FB; color: var(--ink); text-decoration: none; }
+  .navcta { display: flex; gap: 8px; }
+  .navcta a { font: 600 13px/1 var(--sans); padding: 10px 15px; border-radius: 7px; border: 1px solid #DCE1EC; color: var(--ink); }
+  .navcta a:hover { border-color: var(--blue); color: var(--blue); text-decoration: none; }
+  .navcta a.solid { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .navcta a.solid:hover { background: var(--blue-dark); color: #fff; }
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-        rel="stylesheet">
+  /* hero */
+  .hero { padding: 96px 32px 72px; background: linear-gradient(180deg,#F7F9FE 0%,#fff 100%); border-bottom: 1px solid #EEF1F7; text-align: center; }
+  .hero .inner { max-width: 960px; margin: 0 auto; }
+  .pill { display: inline-flex; align-items: center; gap: 8px; background: var(--blue-tint); border: 1px solid #D3E1FF; color: var(--blue); font: 600 11.5px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; padding: 7px 12px; border-radius: 999px; margin-bottom: 28px; }
+  .pill i { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); display: block; }
+  .hero h1 { font: 700 clamp(34px,5vw,58px)/1.06 var(--display); letter-spacing: -.03em; margin: 0 0 20px; text-wrap: balance; }
+  .hero p.tag { font: 400 19px/1.6 var(--sans); color: #5A6376; margin: 0 auto 34px; max-width: 660px; text-wrap: pretty; }
+  .authors { display: flex; flex-wrap: wrap; justify-content: center; column-gap: 14px; row-gap: 6px; font: 400 15px/1.6 var(--sans); color: var(--body); max-width: 800px; margin: 0 auto 14px; }
+  .authors sup { color: var(--muted); }
+  .affil { display: flex; flex-wrap: wrap; justify-content: center; column-gap: 20px; row-gap: 4px; font: 400 13px/1.6 var(--sans); color: var(--muted); max-width: 820px; margin: 0 auto 36px; }
+  .cta { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
 
-  <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css">
-  <!--link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20128%20128%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%99%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;"-->
-  <link rel="shortcut icon" type="image/x-icon" href="./static/images/realm_logo_vector.png">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js"></script>
+  /* teaser */
+  .dark { background: var(--night); }
+  .dark h2 { font: 600 clamp(24px,2.6vw,32px)/1.1 var(--display); letter-spacing: -.02em; color: #fff; margin: 0; }
+  .video-shell { position: relative; border-radius: 14px; overflow: hidden; border: 1px solid #232B41; background: #05080F; box-shadow: 0 24px 60px rgba(0,0,0,.45); aspect-ratio: 16/9; }
+  .video-shell video { display: block; width: 100%; height: 100%; object-fit: contain; background: #05080F; }
+  .play-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; border: none; cursor: pointer; background: radial-gradient(circle at 50% 45%,#131C31 0%,#05080F 100%); }
+  .play-overlay span.disc { width: 74px; height: 74px; border-radius: 50%; background: var(--blue); display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 28px rgba(15,90,240,.45); }
+  .play-overlay span.hint { font: 500 14px/1 var(--sans); color: #9AA8C4; }
 
-  <style>
-    .perturbation-container {
-      position: relative;
-      width: 100%;
-      max-width: 900px;
-      height: auto;
-      aspect-ratio: 900 / 800;
-      margin: 50px auto;
-    }
-    .perturbation-segment {
-      cursor: pointer;
-      transition: opacity 0.2s;
-    }
-    .perturbation-segment:hover {
-      opacity: 0.7;
-    }
-    .perturbation-label {
-      font-family: 'Google Sans', sans-serif;
-      font-size: 20px;
-      fill: #333;
-      font-weight: bold;
-      pointer-events: none;
-    }
-    #perturbation-line {
-        stroke: black;
-        stroke-width: 2;
-    }
-    #perturbation-instruction {
-     font-size: 1.25em;
-     font-style: italic;
-     color: black;
-    }
-    .video-gallery {
-        display: flex; /* Use Flexbox for easy layout */
-        flex-wrap: wrap; /* Allow items to wrap to the next line */
-        gap: 20px; /* Space between the videos */
-        justify-content: center; /* Center the gallery */
-        padding: 20px;
-    }
-    .video-item {
-        /* Set a fixed size for each video container if needed */
-        width: 45%;
-        max-width: 400px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow for visual separation */
-        border-radius: 8px;
-        overflow: hidden;
-    }
+  /* stats */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; margin-bottom: 44px; }
+  .stats > div { background: #fff; padding: 22px 24px; }
+  .stats b { display: block; font: 600 34px/1 var(--display); color: var(--blue); letter-spacing: -.02em; }
+  .stats small { display: block; font: 400 14px/1.4 var(--sans); color: #5A6376; margin-top: 8px; }
 
-    .video-item video {
-        display: block;
-        width: 100%; /* Make the video player fill its container */
-        height: auto;
-    }
+  /* abstract */
+  .abstract-grid { border-top: 1px solid var(--line); padding-top: 56px; display: grid; grid-template-columns: minmax(180px,240px) 1fr; gap: 48px; align-items: start; }
+  .abstract-grid p.body { font: 400 17.5px/1.8 var(--sans); color: #2C3346; margin: 0; text-wrap: pretty; }
 
-    h1 {
-        text-align: center;
-        color: #333;
-    }
-    .section-links .button {
-      font-weight: bold;
-    }
-    @media screen and (max-width: 768px) {
-      .perturbation-label {
-        font-size: 12px;
-      }
-    }
-  </style>
+  /* takeaways */
+  .wash { background: var(--wash); border-top: 1px solid #EEF1F7; border-bottom: 1px solid #EEF1F7; }
+  .takeaways { display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap: 16px; margin-bottom: 40px; }
+  .takeaways .card { padding: 24px 26px 26px; border-radius: 12px; }
+  .takeaways .num { font: 600 12px/1 var(--mono); color: var(--blue); letter-spacing: .1em; margin-bottom: 14px; }
+  .takeaways p { font: 400 16px/1.65 var(--sans); color: #2C3346; margin: 0; text-wrap: pretty; }
+  .pullquote { border-left: 3px solid var(--blue); padding: 4px 0 4px 22px; max-width: 820px; }
+  .pullquote p { font: 400 18px/1.7 var(--sans); color: #2C3346; margin: 0; text-wrap: pretty; }
+
+  /* rollouts */
+  .row-between { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: 28px; }
+  .arrow { width: 40px; height: 40px; border-radius: 8px; border: 1px solid #DCE1EC; background: #fff; color: var(--ink); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .arrow:hover { border-color: var(--blue); color: var(--blue); }
+  .stage { position: relative; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--night); aspect-ratio: 16/9; max-height: 560px; }
+  .stage video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: var(--night); opacity: 0; pointer-events: none; transition: opacity .25s; }
+  .stage video.on { opacity: 1; pointer-events: auto; }
+  .dots { display: flex; justify-content: center; gap: 8px; margin-top: 18px; }
+  .dots button { width: 9px; height: 9px; border: none; padding: 0; border-radius: 99px; background: #CBD3E2; cursor: pointer; transition: all .2s; }
+  .dots button.on { width: 26px; background: var(--blue); }
+
+  /* perturbation wheel */
+  .wheel-card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 32px 32px 24px; }
+  .wheel { position: relative; width: 100%; max-width: 820px; margin: 0 auto 44px; aspect-ratio: 900/800; container-type: inline-size; }
+  .wheel svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .wheel path { cursor: pointer; opacity: .72; transition: opacity .18s; }
+  .wheel path.on { opacity: 1; }
+  .wheel .scene { position: absolute; left: 50%; top: 50%; width: 35.4%; aspect-ratio: 1; transform: translate(-50%,-50%); border-radius: 50%; background: #fff center/cover no-repeat; }
+  .wheel .lbl { position: absolute; white-space: nowrap; pointer-events: none; font-family: var(--mono); font-size: clamp(9px,1.45cqw,15px); font-weight: 600; color: var(--body); }
+  .wheel .lbl.on { color: var(--blue); }
+  .instruction { position: absolute; left: 0; right: 0; bottom: -3%; text-align: center; pointer-events: none; }
+  .instruction em { display: inline-block; background: var(--night); color: #fff; font: italic 400 17px/1.3 var(--sans); padding: 9px 16px; border-radius: 8px; }
+  .legend { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; border-top: 1px solid #EEF1F7; padding-top: 18px; }
+  .legend div { display: flex; align-items: center; gap: 8px; font: 500 12.5px/1 var(--mono); color: #5A6376; }
+  .legend i { width: 11px; height: 11px; border-radius: 3px; display: block; }
+
+  /* results */
+  .figstack { display: grid; gap: 20px; }
+  .figstack .card { padding: 28px; }
+  .figstack figcaption { text-align: center; max-width: 720px; margin-left: auto; margin-right: auto; }
+  .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+  .tabs button { font: 500 13.5px/1 var(--sans); padding: 10px 15px; border-radius: 8px; cursor: pointer; border: 1px solid #DCE1EC; background: #fff; color: var(--body); }
+  .tabs button:hover { border-color: var(--blue); color: var(--blue); }
+  .tabs button.on { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .task-panel { padding: 28px; }
+  .task-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 22px; }
+  .task-head .k { font: 600 11.5px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .task-head .v { font: 500 21px/1.3 var(--display); font-style: italic; color: var(--ink); }
+  .task-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap: 28px; align-items: center; }
+  .task-grid img { display: block; width: 100%; border-radius: 10px; border: 1px solid #EEF1F7; }
+  .task-grid figcaption { font-size: 13.5px; color: var(--muted); text-align: center; margin-top: 12px; }
+
+  /* bibtex + footer */
+  pre.bib { margin: 0; background: #111A2E; border: 1px solid #232B41; border-radius: 12px; padding: 24px; overflow-x: auto; font: 400 13.5px/1.75 var(--mono); color: #C8D4EC; }
+  .copybtn { font: 600 13px/1 var(--sans); color: #C8D4EC; background: transparent; border: 1px solid #2A3450; padding: 11px 16px; border-radius: 8px; cursor: pointer; }
+  .copybtn.done { background: #5E9BFF; color: var(--ink); }
+  footer { padding: 56px 32px; background: var(--night); border-top: 1px solid #1B2438; }
+  footer .wrap { display: flex; justify-content: space-between; align-items: flex-start; gap: 32px; flex-wrap: wrap; }
+  footer p { font: 400 13.5px/1.7 var(--sans); color: #7C88A3; margin: 0; max-width: 520px; }
+  footer a { color: #5E9BFF; }
+  footer .links { display: flex; gap: 10px; }
+  footer .links a { font: 600 13px/1 var(--sans); color: #C8D4EC; border: 1px solid #2A3450; padding: 10px 15px; border-radius: 7px; }
+  footer .links a:hover { border-color: #5E9BFF; color: #fff; text-decoration: none; }
+
+  @media (max-width: 720px) {
+    section { padding: 64px 20px; }
+    .hero { padding: 64px 20px 48px; }
+    .navbar { padding: 0 16px; gap: 12px; }
+    .navlinks { display: none; }
+    .abstract-grid { grid-template-columns: 1fr; gap: 20px; }
+  }
+</style>
 </head>
-
 <body>
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-  <div class="navbar-menu">
-    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-      <a class="navbar-item" href="https://martin-sedlacek.com">
-      <span class="icon">
-          <i class="fas fa-home"></i>
-      </span>
-      </a>
+
+<header class="top">
+  <div class="navbar">
+    <a class="brand" href="#top"><img src="./static/images/realm_logo_vector.png" alt="REALM" /><span>REALM</span></a>
+    <nav class="navlinks">
+      <a href="#overview">Overview</a>
+      <a href="#abstract">Abstract</a>
+      <a href="#takeaways">Takeaways</a>
+      <a href="#evaluations">Rollouts</a>
+      <a href="#perturbations">Perturbations</a>
+      <a href="#real-to-sim">Real-to-Sim</a>
+      <a href="#benchmark">Results</a>
+    </nav>
+    <div class="navcta">
+      <a href="https://arxiv.org/abs/2512.19562">arXiv</a>
+      <a class="solid" href="https://github.com/martin-sedlacek/REALM">Code</a>
     </div>
   </div>
-</nav>
+</header>
 
+<section class="hero" id="top">
+  <div class="inner">
+    <div class="pill"><i></i>Benchmark · arXiv 2512.19562</div>
+    <img src="./static/images/realm_logo_vector.png" alt="REALM logo" style="width:112px;display:block;margin:0 auto 24px" />
+    <h1>A real-to-sim validated benchmark for generalization in robotic manipulation</h1>
+    <p class="tag">High-fidelity simulation with aligned robot control — 15 perturbation factors, 7 manipulation skills, 4,000+ objects — that predicts how VLA policies behave in the real world.</p>
+    <div class="authors">
+      <span><a href="https://martin-sedlacek.com">Martin Sedlacek</a><sup>1,2</sup></span>
+      <span>Pavlo Yefanov<sup>1,2</sup></span>
+      <span><a href="https://ponimatkin.github.io/">Georgy Ponimatkin</a><sup>1,2</sup></span>
+      <span><a href="https://jaibardhan.com/">Jai Bardhan</a><sup>1</sup></span>
+      <span>Simon Pilc<sup>1,2</sup></span>
+      <span><a href="https://medericfourmy.github.io/">Mederic Fourmy</a><sup>1</sup></span>
+      <span><a href="https://ekazakos.github.io/">Evangelos Kazakos</a><sup>1</sup></span>
+      <span><a href="https://scholar.google.com/citations?user=0uKdbscAAAAJ&amp;">Cees Snoek</a><sup>3</sup></span>
+      <span><a href="https://scholar.google.com/citations?user=NCtKHnQAAAAJ&amp;hl=en&amp;oi=ao">Josef Sivic</a><sup>1</sup></span>
+      <span><a href="https://petrikvladimir.github.io/">Vladimir Petrik</a><sup>1</sup></span>
+    </div>
+    <div class="affil">
+      <span><sup>1</sup> Czech Institute of Informatics, Robotics and Cybernetics, CTU in Prague</span>
+      <span><sup>2</sup> Faculty of Electrical Engineering, CTU in Prague</span>
+      <span><sup>3</sup> University of Amsterdam</span>
+    </div>
+    <div class="cta">
+      <a class="btn btn-primary" href="https://arxiv.org/abs/2512.19562">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 1.5h6l4 4v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-12a1 1 0 0 1 1-1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M9 1.5v4h4" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+        Read the paper</a>
+      <a class="btn" href="https://github.com/martin-sedlacek/REALM">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38l-.01-1.34c-2.23.48-2.7-1.07-2.7-1.07-.36-.93-.89-1.18-.89-1.18-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.89.87 2.35.67.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48l-.01 2.2c0 .21.145.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        View code</a>
+      <a class="btn" href="#video">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 5.2l4.2 2.8-4.2 2.8V5.2z" fill="currentColor"/></svg>
+        Teaser video</a>
+    </div>
+  </div>
+</section>
 
-<section class="hero">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-            <div style="text-align: center;">
-                <img src="./static/images/realm_logo_vector.png" alt="logo" style="width: 200px; margin-bottom: 1rem;"/>
-            </div>
-          <h1 class="title is-1 publication-title">REALM: A Real-to-Sim Validated Benchmark for Generalization in Robotic Manipulation</h1>
-          <div class="is-size-5 publication-authors">
-            <span class="author-block">
-              <a href="https://martin-sedlacek.com">Martin Sedlacek</a><sup>1,2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="">Pavlo Yefanov</a><sup>1,2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://ponimatkin.github.io/">Georgy Ponimatkin</a><sup>1,2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://jaibardhan.com/">Jai Bardhan</a><sup>1</sup>,
-            </span>
-            <span class="author-block">
-              <a href="">Simon Pilc</a><sup>1,2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://medericfourmy.github.io/">Mederic Fourmy</a><sup>1</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://ekazakos.github.io/">Evangelos Kazakos</a><sup>1</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://scholar.google.com/citations?user=0uKdbscAAAAJ&">Cees Snoek</a><sup>3</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://scholar.google.com/citations?user=NCtKHnQAAAAJ&hl=en&oi=ao">Josef Sivic</a><sup>1</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://petrikvladimir.github.io/">Vladimir Petrik</a><sup>1</sup>
-            </span>
-            <br>
-            <span class="author-block" style="margin: 0px 6px;"><sup>1</sup>Czech Institute of Informatics, Robotics and Cybernetics, Czech Technical University in Prague</span>
-            <span class="author-block" style="margin: 0px 6px;"><sup>2</sup>Faculty of Electrical Engineering, Czech Technical University in Prague</span>
-            <span class="author-block" style="margin: 0px 6px;"><sup>3</sup>University of Amsterdam</span>
-          </div>
+<section class="dark" id="video" style="padding:80px 32px">
+  <div class="wrap" style="max-width:1000px">
+    <div class="row-between" style="align-items:baseline">
+      <h2>Teaser video</h2>
+      <span style="font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#7C88A3">Overview of the environment</span>
+    </div>
+    <div class="video-shell">
+      <video id="teaser" controls playsinline preload="none"></video>
+      <button class="play-overlay" id="teaser-play" type="button" aria-label="Play teaser video">
+        <span class="disc"><svg width="26" height="26" viewBox="0 0 16 16" fill="#fff"><path d="M5.5 3.6l7 4.4-7 4.4V3.6z"/></svg></span>
+        <span class="hint">Play teaser</span>
+      </button>
+    </div>
+  </div>
+</section>
 
-          <div class="section-links" style="margin-top: 1rem; margin-bottom: 1rem;">
-            <div>
-              <a href="#video" class="button is-light">Video</a>
-              <a href="#overview" class="button is-light">Overview</a>
-              <a href="#abstract" class="button is-light">Abstract</a>
-              <a href="#takeaways" class="button is-light">Takeaways</a>
-              <a href="#evaluations" class="button is-light">Example Evaluations</a>
-              <a href="#perturbations" class="button is-light">Perturbations</a>
-            </div>
-            <div style="margin-top: 0.5rem;">
-              <a href="#real-to-sim" class="button is-light">Real-to-Sim Validation</a>
-              <a href="#benchmark" class="button is-light">Benchmark Results</a>
-            </div>
-          </div>
+<section id="overview" style="padding-bottom:40px">
+  <div class="wrap">
+    <div class="eyebrow">Overview</div>
+    <h2 class="sub">A simulation benchmark whose numbers track the real robot</h2>
+    <p class="lede">REALM is a large-scale realistic simulation environment and benchmark for generalization in robotic manipulation. It supports 7 distinct manipulation skills and stress-tests them against 15 perturbations. Through empirical validation, we show that evaluation results in simulation are strongly correlated with real-world performance.</p>
+    <div class="stats">
+      <div><b>15</b><small>perturbation factors</small></div>
+      <div><b>7</b><small>manipulation skills</small></div>
+      <div><b>4,000+</b><small>objects</small></div>
+      <div><b>3</b><small>VLA models evaluated</small></div>
+    </div>
+    <figure><img src="./static/images/realm_overview_fig.png" alt="REALM overview figure" style="display:block;width:100%;border:1px solid var(--line);border-radius:12px" /></figure>
+  </div>
+</section>
 
-          <!-- div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>CIIRC CTU,</span>
-            <span class="author-block"><sup>2</sup>UvA</span>
-          </div  -->
+<section id="abstract" style="padding-top:64px">
+  <div class="wrap">
+    <div class="abstract-grid">
+      <div>
+        <div class="eyebrow" style="font-size:clamp(24px,2.6vw,32px)">Abstract</div>
+        <p style="font:400 14px/1.6 var(--sans);color:var(--muted);margin:0">Evaluating π0, π0-FAST and GR00T N1.5 under systematic perturbation.</p>
+      </div>
+      <p class="body">Vision-Language-Action (VLA) models empower robots to understand and execute tasks described by natural language instructions. However, a key challenge lies in their ability to generalize beyond the specific environments and conditions they were trained on, which is presently difficult and expensive to evaluate in the real world. To address this gap, we present <strong>REALM</strong>, a new simulation environment and benchmark designed to evaluate the generalization capabilities of VLA models, with a specific emphasis on establishing a strong correlation between simulated and real-world performance through high-fidelity visuals and aligned robot control. Our environment offers a suite of 15 perturbation factors, 7 manipulation skills, and more than 4,000 objects. Finally, we establish two task sets that form our benchmark and evaluate the <em>π0</em>, <em>π0-FAST</em>, and <em>GR00T N1.5</em> VLA models, showing that generalization and robustness remain an open challenge. More broadly, we also show that simulation gives us a valuable proxy for the real world and allows us to systematically probe for and quantify the weaknesses and failure modes of VLAs.</p>
+    </div>
+  </div>
+</section>
 
-          <!-- div class="column has-text-centered">
-            <p class="is-size-5">🚧 Website under construction 🚧</p>
-            <p class="is-size-5">We are working on delivering a pre-print and open-sourcing the codebase for everyone to use as soon as possible. If you have questions, feedback, ideas, or are interested in using REALM please feel free to reach out to  <a href="mailto:martin.martin.sedlacek@gmail.com" class="text-blue-600 hover:text-blue-800 font-medium">Martin Sedlacek</a>.</p>
-          </div -->
+<section id="takeaways" class="wash">
+  <div class="wrap">
+    <div class="eyebrow">Takeaways</div>
+    <h2 class="sub" style="margin-bottom:40px">Six findings from evaluating VLAs under perturbation</h2>
+    <div class="takeaways">
+      <div class="card"><div class="num">I</div><p>High-fidelity simulation with aligned robot control can serve as a valuable proxy for real-world performance, mitigating the issue of saturated simulation benchmarks.</p></div>
+      <div class="card"><div class="num">II</div><p>Despite VLM backbones pretrained on Internet-scale data, there is a noticeable drop in performance from purely semantic perturbations.</p></div>
+      <div class="card"><div class="num">III</div><p>There is still a noticeable sensitivity to camera view for all models, despite the unusually high diversity of viewpoints in the DROID dataset.</p></div>
+      <div class="card"><div class="num">IV</div><p>Behavioral generalization across objects and their properties is the most challenging for all tested models.</p></div>
+      <div class="card"><div class="num">V</div><p>Conversely, all tested models seem to generalize well across known skills when the manipulated object remains the same.</p></div>
+      <div class="card"><div class="num">VI</div><p>Reliability and robustness under perturbations is still highly challenging — models exhibit very low success rates on many basic manipulation tasks.</p></div>
+    </div>
+    <div class="pullquote"><p>While we recognize the tremendous progress that enabled VLAs to start performing manipulation tasks in unseen settings, including many scenes in our simulation, we believe these results indicate that current models still lack the capabilities for autonomous real-world deployment.</p></div>
+  </div>
+</section>
 
-          <div class="column has-text-centered">
-            <div class="publication-links">
-            <!--
-              <span class="link-block">
-                <a href="https://arxiv.org/pdf/2011.12948"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                  </span>
-                  <span>Paper</span>
-                </a>
-              </span>
-              <span class="link-block">
-                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-youtube"></i>
-                  </span>
-                  <span>Video</span>
-                </a>
-              </span>
-            <span class="link-block">
-                <a href="https://github.com/google/nerfies/releases/tag/0.1"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="far fa-images"></i>
-                  </span>
-                  <span>Data</span>
-                </a>
-                </span>
-              -->
-              <span class="link-block">
-                <a href="https://arxiv.org/abs/2512.19562"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
-                </a>
-              </span>
-              <span class="link-block">
-                <a href="https://github.com/martin-sedlacek/REALM"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-github"></i>
-                  </span>
-                  <span>Code</span>
-                </a>
-              </span>
-            </div>
-          </div>
+<section id="evaluations">
+  <div class="wrap">
+    <div class="row-between">
+      <div>
+        <div class="eyebrow">Rollouts</div>
+        <h2 class="sub" style="margin:0">Example policy evaluations</h2>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="arrow" id="clip-prev" type="button" aria-label="Previous clip"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="arrow" id="clip-next" type="button" aria-label="Next clip"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+    <div class="stage" id="clip-stage"></div>
+    <div class="dots" id="clip-dots"></div>
+  </div>
+</section>
+
+<section id="perturbations" class="wash">
+  <div class="wrap">
+    <div class="eyebrow">Perturbations</div>
+    <h2 class="sub">Fifteen ways to break a policy</h2>
+    <p class="lede" style="margin-bottom:48px">To assess the robustness of VLAs under variable conditions, we implemented perturbations that change the visual, behavioral, and semantic properties of the tasks and environments. We adopt 14 of the 22 perturbations from the <a href="https://stargen-taxonomy.github.io/">☆-Gen taxonomy</a> and introduce a separate 15th V-LIGHT perturbation for scene illumination.</p>
+
+    <div class="wheel-card">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:8px">
+        <h3 style="font:600 22px/1.2 var(--display);letter-spacing:-.01em;margin:0">Visualizer</h3>
+        <p style="font:400 14px/1.4 var(--sans);color:var(--blue);margin:0">Hover a segment to see how the scene changes.</p>
+      </div>
+      <div class="wheel" id="wheel">
+        <div class="scene" id="wheel-scene" role="img" aria-label="Perturbed scene preview"></div>
+        <div class="instruction"><em id="wheel-instruction">“Pick up the spoon.”</em></div>
+      </div>
+      <div class="legend">
+        <div><i style="background:#0A1020"></i>Default</div>
+        <div><i style="background:#76C876"></i>Visual</div>
+        <div><i style="background:#C49B7F"></i>Semantic</div>
+        <div><i style="background:#A3CCFA"></i>Behavioral</div>
+        <div><i style="background:#45CACA"></i>Visual+Behav.</div>
+        <div><i style="background:#C298FF"></i>Sem.+Behav.</div>
+        <div><i style="background:#646464"></i>Vis+Sem+Behav.</div>
+      </div>
+    </div>
+
+    <figure style="margin-top:40px;text-align:center">
+      <img src="./static/images/perturbation_descriptions.png" alt="Descriptions of the 15 perturbations" style="width:100%;max-width:760px;border:1px solid var(--line);border-radius:12px;background:#fff" />
+      <figcaption style="color:var(--muted)">Description of the perturbations used in our approach.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="real-to-sim">
+  <div class="wrap">
+    <div class="eyebrow">Real-to-Sim Validation</div>
+    <h2 class="sub" style="margin-bottom:48px">Does simulation help us predict real performance?</h2>
+
+    <figure style="margin-bottom:56px">
+      <img src="./static/images/real2sim_v2.png" alt="Real-to-sim correlation figure" style="display:block;width:100%;border:1px solid var(--line);border-radius:12px" />
+      <figcaption style="max-width:860px"><strong style="color:var(--ink)">Sim-to-real validation of REALM.</strong> Task progression is shown in the real world (x-axis) and simulation (y-axis). <strong style="color:var(--ink)">Left:</strong> a strong Pearson correlation (<em>r</em>) with datapoints close to identity (gray dashed line) and a low Mean Maximum Rank Violation (MMRV) on 7 tasks under 5 visual and behavioral perturbations. <strong style="color:var(--ink)">Right:</strong> results are also highly correlated under individual perturbations. We observe <em>p &lt; 0.001</em> between real and simulated rollouts for all settings, indicating that REALM is a strong proxy for real-world performance.</figcaption>
+    </figure>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:48px;border-top:1px solid var(--line);padding-top:56px">
+      <figure>
+        <img src="./static/images/trajectory_following.png" alt="Trajectory following comparison" style="display:block;width:100%;border:1px solid var(--line);border-radius:12px" />
+        <figcaption>Control alignment. A trajectory replay in simulation with default robot control (left) and our aligned control (right). Yellow is ground truth from a real robot, blue is simulation — alignment yields significantly more realistic trajectory following.</figcaption>
+      </figure>
+      <figure>
+        <img src="./static/images/attn_maps.png" alt="Attention maps from the pi0 action expert" style="display:block;width:100%;border:1px solid var(--line);border-radius:12px" />
+        <figcaption>Attention maps from the π0 action expert. Replaying the same trajectory in reality (top) and simulation (bottom), the model attends to similar patches — cosine similarity of 0.85/1 averaged over ~280 frames, all layers and heads.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section id="benchmark" class="wash" style="border-bottom:none">
+  <div class="wrap">
+    <div class="eyebrow">Benchmark Results</div>
+    <h2 class="sub">Three VLAs, fifteen perturbations, eight tasks</h2>
+    <p class="lede" style="margin-bottom:48px">A detailed evaluation of π0, π0-FAST and GR00T N1.5 under 15 distinct perturbations on the 8 tasks that comprise the REALM-base task set.</p>
+
+    <div class="figstack">
+      <figure class="card">
+        <img src="./static/images/res_overall.png" alt="Overall results" style="display:block;width:100%;max-width:560px;margin:0 auto" />
+        <figcaption>Results on 8 tasks in the REALM-base task set, spanning 5 basic manipulation skills.</figcaption>
+      </figure>
+      <figure class="card">
+        <img src="./static/images/binary_sr.png" alt="Success rate violin plots" style="display:block;width:100%" />
+        <figcaption>Success rate (y-axis) on the REALM-base task set (x-axis). Violin plots show Bayesian posteriors of success rates under a uniform Beta prior and the observed data.</figcaption>
+      </figure>
+      <figure class="card">
+        <img src="./static/images/time_to_completion.png" alt="Time to completion" style="display:block;width:100%" />
+        <figcaption>Time to completion. Average time to successfully complete each task per model, obtained by dividing simulation timesteps by the fixed control frequency — model inference time and latency are not accounted for.</figcaption>
+      </figure>
+    </div>
+
+    <div style="border-top:1px solid #E1E6F0;margin-top:64px;padding-top:56px">
+      <h3 style="font:600 30px/1.15 var(--display);letter-spacing:-.02em;margin:0 0 14px">Individual task results</h3>
+      <p style="font:400 16.5px/1.7 var(--sans);color:var(--body);margin:0 0 32px;max-width:760px;text-wrap:pretty">Evaluation of three VLA models under 15 perturbations across the REALM-base and REALM-articulated task sets. Left: a visualization of the task. Right: task progression on the nominal default setting (black) and under individual perturbations (colored curves).</p>
+      <div class="tabs" id="task-tabs"></div>
+      <div class="card task-panel">
+        <div class="task-head">
+          <span class="k">Instruction</span>
+          <span class="v" id="task-instruction"></span>
+        </div>
+        <div class="task-grid">
+          <figure><img id="task-viz" src="" alt="Task visualization" /><figcaption>Task visualization</figcaption></figure>
+          <figure><img id="task-res" src="" alt="Results under perturbations" /><figcaption>Results under perturbations</figcaption></figure>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <!-- Paper video. -->
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          <h2 id="video" class="title is-3">Teaser video</h2>
-          <div class="publication-video">
-            <iframe src="./static/videos/REALM.mp4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
-          </div>
-        </div>
+<section id="BibTeX" class="dark">
+  <div class="wrap">
+    <div class="row-between" style="margin-bottom:22px">
+      <div>
+        <div class="eyebrow" style="color:#fff;font-size:clamp(24px,2.6vw,32px)">Citation</div>
+        <p style="font:500 16px/1.55 var(--sans);color:#8FA6CE;margin:0">BibTeX</p>
       </div>
+      <button class="copybtn" id="copy-bib" type="button">Copy BibTeX</button>
     </div>
-    <!--/ Paper video. -->
-  </div>
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <!-- Overview. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 id="overview" class="title is-3">Overview</h2>
-        <div class="content has-text-justified">
-          <p>
-            <img src="./static/images/realm_overview_fig.png" alt="Overview Figure">
-            <b>REALM</b> is a large-scale realistic simulation environment and benchmark for generalization
-              in robotic manipulation. It supports 7 distinct manipulation skills and stress-tests them
-              against 15 perturbations. Through empirical validation, we show that evaluation results in
-              simulation are strongly correlated to real-world performance.
-          </p>
-        </div>
-      </div>
-    </div>
-    <!--/ Overview. -->
-
-    <!-- Abstract. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 id="abstract" class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            Abstract— Vision-Language-Action (VLA) models empower
-            robots to understand and execute tasks described by natural
-            language instructions. However, a key challenge lies in their
-            ability to generalize beyond the specific environments and
-            conditions they were trained on, which is presently difficult
-            and expensive to evaluate in the real-world. To address this
-            gap, we present REALM, a new simulation environment and
-            benchmark designed to evaluate the generalization capabilities
-            of VLA models, with a specific emphasis on establishing a
-            strong correlation between simulated and real-world perfor-
-            mance through high-fidelity visuals and aligned robot control.
-            Our environment offers a suite of 15 perturbation factors, 7
-            manipulation skills, and more than 4,000 objects. Finally, we
-            establish two task sets that form our benchmark and evaluate
-            the <i>π0</i>, <i>π0-FAST</i>, and <i>GR00T N1.5</i> VLA models, showing that
-            generalization and robustness remain an open challenge. More
-            broadly, we also show that simulation gives us a valuable proxy
-            for the real-world and allows us to systematically probe for and
-            quantify the weaknesses and failure modes of VLAs.
-          </p>
-        </div>
-      </div>
-    </div>
-    <!--/ Abstract. -->
-  </div>
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <!-- Takeaways. -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 id="takeaways" class="title is-3 has-text-centered">Takeaways</h2>
-        <div class="columns is-centered">
-          <div class="column is-four-fifths">
-            <div class="content has-text-justified">
-              <ol type="I">
-                <li>High-fidelity simulation
-with aligned robot control can serve as a valuable proxy
-for real-world performance, mitigating the issue of saturated
-simulation benchmarks.</li>
-                <li>Despite VLM backbones pretrained
-on Internet-scale data, there is a noticeable drop in
-performance from purely semantic perturbations.</li>
-                <li>There is still a noticeable sensitivity
-to camera view for all models despite the unusually high
-diversity of viewpoints in the DROID dataset.</li>
-                <li>Behavioral
-generalization across objects and their properties is the most
-challenging for all tested models.</li>
-                <li>Conversely, all tested
-models seem to generalize well across known skills when
-the manipulated object remains the same.</li>
-                <li>Reliability
-and robustness, especially under perturbations, is still highly
-challenging and models still exhibit very low success rates
-on many basic manipulation tasks.</li>
-              </ol>
-              <p>
-                While we recognize the tremendous progress that enabled
-VLAs to start performing manipulation tasks in unseen
-settings, including many scenes in our simulation, we believe
-these results indicate that current models still lack
-the capabilities for autonomous real-world deployment.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--/ Takeaways. -->
-  </div>
-</section>
-
-<!--section class="hero is-light is-small">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3 has-text-centered">Policy Evaluations</h2>
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item">
-          <video poster="https://via.placeholder.com/300x200.png?text=Video+1" id="video1" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/put_banana.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="https://via.placeholder.com/300x200.png?text=Video+2" id="video2" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/pick_spoon.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="https://via.placeholder.com/300x200.png?text=Video+3" id="video3" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/stack_cubes_v3.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="https://via.placeholder.com/300x200.png?text=Video+4" id="video4" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/rotate_mug_v2.mp4" type="video/mp4">
-          </video>
-        </div>
-      </div>
-    </div>
-  </div>
-</section-->
-
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <div class="container">
-      <h2 id="evaluations" class="title is-3 has-text-centered">Example Policy Evaluations</h2>
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item has-text-centered">
-          <video autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/put_banana_annotated.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="item has-text-centered">
-          <video autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/pick_spoon_annotated.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="item has-text-centered">
-          <video autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/stack_cubes_annotated.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="item has-text-centered">
-          <video autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/rotate_marker_annotated.mp4" type="video/mp4">
-          </video>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <!-- Perturbations. -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 id="perturbations" class="title is-3 has-text-centered">Perturbations</h2>
-        <p>To assess the robustness of VLAs under variable conditions, we implemented perturbations that change the visual,
-            behavioral, and semantic properties of the tasks and environments. We adopt 14 of the 22 perturbations from the
-            <a href="https://stargen-taxonomy.github.io/">&#9734;-Gen taxonomy</a> and introduce a separate 15-th V-LIGHT
-            perturbations for scene illumination.
-        </p>
-        <br>
-        <h3 class="title is-3 has-text-centered">Visualizer</h3>
-        <p style="color: red; text-align: center;"><i>Try hovering over the colored segments in the wheel below to see examples of how the scene can change!</i></p>
-        <div class="perturbation-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-          <!-- SVG and Image will be generated here -->
-          <p id="perturbation-instruction" class="is-size-5" style="position: absolute; bottom: 31.25%;">"Pick up the spoon."</p>
-        </div>
-        <div class="content has-text-centered">
-            <p>Description of the perturbations used in our approach:</p>
-            <img src="./static/images/perturbation_descriptions.png" alt="Perturbation Descriptions" style="width: 66.67%;">
-        </div>
-      </div>
-    </div>
-    <!--/ Perturbations. -->
-  </div>
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <!-- Real-to-Sim. -->
-    <div class="columns is-centered">
-      <div class="column is-four-fifths">
-        <h2 id="real-to-sim" class="title is-3 has-text-centered">Real-to-Sim Validation</h2>
-        <div class="content has-text-centered">
-          <img src="./static/images/real2sim_v2.png" alt="Real-to-Sim Figure" style="width: 100%;">
-          <p>
-             <b>Sim-to-real validation of REALM</b>. Task progression is shown in the real-world (x-axis) and simulation (y-axis).
-             <b>Left</b>: We show a strong Pearson correlation (<i>r</i>) with datapoints close to identity (gray dashed line)
-             and a low Mean Maximum Rank Violation (MMRV) on 7 tasks under 5 visual and behavioral perturbations.
-             <b>Right</b>: The results are also highly correlated under individual perturbations. We observe a p-value
-             of <i>p < 0.001</i> between real and simulated rollouts for all settings indicating that REALM is a strong
-              proxy for real-world performance.
-          </p>
-          <hr style="height:2px;border-width:0;color:lightgray;background-color:lightgray">
-          <img src="./static/images/trajectory_following.png" alt="Trajectory Following Figure" style="width: 66.67%;">
-          <p>
-            Visualization of the control alignment. A trajectory replay in simulation with default robot control (left)
-            and our aligned control (right). Yellow trajectory represents the ground truth from a real robot and blue
-            is from simulation. Our control alignment results in significantly more realistic trajectory following.
-          </p>
-          <hr style="height:2px;border-width:0;color:lightgray;background-color:lightgray">
-          <img src="./static/images/attn_maps.png" alt="Attention Maps Figure" style="width: 66.67%;">
-          <p>
-            Attention maps from the π0 action expert. We replay the same robot trajectory solving a task in reality (top)
-            and simulation (bottom) and observe that the model largely  attends to similar patches. We compute the
-            cosine similarity between the attention maps from real and simulated images averaged over approx. 280
-            frames in the video and all layers and attention heads in the π0 action expert during the last step of the
-            flow matching process, yielding a high similarity score of 0.85/1.
-          </p>
-        </div>
-      </div>
-    </div>
-    <!--/ Real-to-Sim. -->
-  </div>
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <!-- Benchmark. -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 id="benchmark" class="title is-3 has-text-centered">Benchmarking Results</h2>
-        <div class="content has-text-centered">
-          <p>
-            This section presents a detailed evaluation of three VLAs under 15 distinct perturbations on the 8 tasks that comprise our benchmark.
-          </p>
-        </div>
-        <div class="columns is-vcentered">
-          <div class="column">
-            <img src="./static/images/res_overall.png" alt="Overall Task" style="width: 50%; display: block; margin-left: auto; margin-right: auto;">
-          </div>
-        </div>
-        <p class="has-text-centered">Results on 8 tasks in the REALM-base task set spanning 5 basic manipulation skills.</p>
-        <hr style="height:2px;border-width:0;color:lightgray;background-color:lightgray">
-        <div class="columns is-vcentered">
-            <div class="column">
-              <img src="./static/images/binary_sr.png" alt="Overall Task" style="width: 80%; display: block; margin-left: auto; margin-right: auto;">
-            </div>
-        </div>
-        <p class="has-text-centered">Success Rate (y-axis) on the REALM-base task set (x-axis). The Violin plots
-  show Bayesian posteriors of success rates under a uniform
-  Beta prior and the observed data.</p>
-        <div class="columns is-vcentered">
-            <div class="column">
-              <img src="./static/images/time_to_completion.png" alt="Overall Task" style="width: 80%; display: block; margin-left: auto; margin-right: auto;">
-            </div>
-        </div>
-        <p class="has-text-centered">Time to completion. Average time to (successfully)
-          complete a task for each model and task in REALM-base task set. The time in seconds is
-          obtained by dividing the number of timesteps in simulation
-          by the control frequency (fixed), thus not accounting for
-          model inference times and latency.
-        </p>
-        <br>
-        <br>
-        <h3 class="title is-3 has-text-centered">Individual Task Results</h3>
-        <p class="has-text-centered">
-            This section presents a detailed evaluation of three VLA models under 15 distinct perturbations
-            on 10 tasks in the REALM-base and REALM-articulated task sets. On the left, we show a visualization of the
-            task, and on the right, we show the task progression on the nominal default setting (black) and under
-            individual perturbations (colored curves).
-        </p>
-        <hr style="height:2px;border-width:0;color:lightgray;background-color:lightgray">
-          <h3 class="title is-3 has-text-centered">Instruction: <i>Put the green block in the bowl</i></h3>
-        <div class="columns is-vcentered">
-          <div class="column">
-            <img src="./static/images/put_block.png" alt="Benchmark Image 1">
-            <p class="has-text-centered">Task visualization</p>
-          </div>
-          <div class="column">
-            <img src="./static/images/res_put_block_into_bowl.png" alt="Put Task">
-            <p class="has-text-centered">Results under perturbations</p>
-          </div>
-        </div>
-        <!-- p class="has-text-centered">This is a description for the first row of images.</p -->
-        <hr style="height:2px;border-width:0;color:lightgray;background-color:lightgray">
-        <h3 class="title is-3 has-text-centered">Instruction: <i>Put the banana in the box</i></h3>
-        <div class="columns is-vcentered">
-          <div class="column">
-            <img src="./static/images/put_banana.png" alt="Benchmark Image 1">
-            <p class="has-text-centered">Task visualization</p>
-          </div>
-          <div class="column">
-            <img src="./static/images/res_put_banana_into_box.png" alt="Put Task">
-            <p class="has-text-centered">Results under perturbations</p>
-          </div>
-        </div>
-
-        <!-- p class="has-text-centered">This is a description for the first row of images.</p -->
-        <hr style="height:2px;border-width:0;color:lightgray;background-color:lightgray">
-        <h3 class="title is-3 has-text-centered">Instruction: <i>Rotate the marker</i></h3>
-        <div class="columns is-vcentered">
-          <div class="column">
-            <img src="./static/images/rotate_marker.png" alt="Benchmark Image 1">
-            <p class="has-text-centered">Task visualization</p>
-          </div>
-          <div class="column">
-            <img src="./static/images/res_rotate_marker.png" alt="Put Task">
-            <p class="has-text-centered">Results under perturbations</p>
-          </div>
-        </div>
-
-        <!--p class="has-text-centered">This is a description for the third row of images.</p-->
-        <hr style="height:2px;border-width:0;color:lightgray;background-color:lightgray">
-        <h3 class="title is-3 has-text-centered">Instruction: <i>Rotate the mug</i></h3>
-        <div class="columns is-vcentered">
-          <div class="column">
-            <img src="./static/images/gen_rotate_mug_cam1.png" alt="Benchmark Image 9">
-            <p class="has-text-centered">Task visualization</p>
-          </div>
-          <div class="column">
-            <img src="./static/images/res_rotate_mug.png" alt="Rotate Task">
-            <p class="has-text-centered">Results under perturbations</p>
-          </div>
-        </div>
-        <!-- p class="has-text-centered">This is a description for the first row of images.</p -->
-        <hr style="height:2px;border-width:0;color:lightgray;background-color:lightgray">
-        <h3 class="title is-3 has-text-centered">Instruction: <i>Pick up the spoon</i></h3>
-        <div class="columns is-vcentered">
-          <div class="column">
-            <img src="./static/images/pick_spoon.png" alt="Benchmark Image 3">
-            <p class="has-text-centered">Task visualization</p>
-          </div>
-          <div class="column">
-            <img src="./static/images/res_pick_spoon.png" alt="Pick Task">
-            <p class="has-text-centered">Results under perturbations</p>
-          </div>
-        </div>
-
-        <!-- p class="has-text-centered">This is a description for the first row of images.</p -->
-        <hr style="height:2px;border-width:0;color:lightgray;background-color:lightgray">
-        <h3 class="title is-3 has-text-centered">Instruction: <i>Pick up the water bottle</i></h3>
-        <div class="columns is-vcentered">
-          <div class="column">
-            <img src="./static/images/gen_pick_water_bottle_cam1.png" alt="Benchmark Image 3">
-            <p class="has-text-centered">Task visualization</p>
-          </div>
-          <div class="column">
-            <img src="./static/images/res_pick_water_bottle.png" alt="Pick Task">
-            <p class="has-text-centered">Results under perturbations</p>
-          </div>
-        </div>
-          <!-- p class="has-text-centered">This is a description for the second row of images.</p -->
-        <hr style="height:2px;border-width:0;color:lightgray;background-color:lightgray">
-        <h3 class="title is-3 has-text-centered">Instruction: <i>Stack the green block on top of the yellow block</i></h3>
-        <div class="columns is-vcentered">
-          <div class="column">
-            <img src="./static/images/gen_stack_cubes.png" alt="Benchmark Image 5">
-            <p class="has-text-centered">Task visualization</p>
-          </div>
-          <div class="column">
-            <img src="./static/images/res_stack_cubes.png" alt="Stack Task">
-            <p class="has-text-centered">Results under perturbations</p>
-          </div>
-        </div>
-        <!--p class="has-text-centered">This is a description for the fourth row of images.</p-->
-        <hr style="height:2px;border-width:0;color:lightgray;background-color:lightgray">
-        <h3 class="title is-3 has-text-centered">Instruction: <i>Push the switch</i></h3>
-        <div class="columns is-vcentered">
-          <div class="column">
-            <img src="./static/images/gen_push_switch_cam1.png" alt="Benchmark Image 7">
-            <p class="has-text-centered">Task visualization</p>
-          </div>
-          <div class="column">
-            <img src="static/images/res_push_switch.png" alt="Push Task">
-            <p class="has-text-centered">Results under perturbations</p>
-          </div>
-        </div>
-
-        <!--p class="has-text-centered">This is a description for the fourth row of images.</p-->
-        <hr style="height:2px;border-width:0;color:lightgray;background-color:lightgray">
-        <h3 class="title is-3 has-text-centered">Instruction: <i>Open the drawer</i></h3>
-        <div class="columns is-vcentered">
-          <div class="column">
-            <img src="./static/images/gen_open_drawer.png" alt="Benchmark Image 9">
-            <p class="has-text-centered">Task visualization</p>
-          </div>
-          <div class="column">
-            <img src="static/images/res_open_drawer.png" alt="Push Task">
-            <p class="has-text-centered">Results under perturbations</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-    <!--/ Benchmark. -->
-  </div>
-</section>
-
-<section class="section" id="BibTeX">
-  <div class="container is-max-desktop content">
-    <h3 class="title is-3 has-text-centered">BibTeX</h3>
-    <pre><code>@article{sedlacek2025realm,
+<pre class="bib" id="bib">@article{sedlacek2025realm,
     title={REALM: A Real-to-Sim Validated Benchmark for Generalization in Robotic Manipulation},
-    author={Martin Sedlacek and Pavlo Yefanov and Georgy Ponimatkin and Jai Bardhan and Simon Pilc and Mederic Fourmy and Evangelos Kazakos and Cees G. M. Snoek and Josef Sivic and Vladimir Petrik},
-    journal = {arXiv preprint arXiv:2512.19562},
+    author={Martin Sedlacek and Pavlo Yefanov and Georgy Ponimatkin and Jai Bardhan and
+            Simon Pilc and Mederic Fourmy and Evangelos Kazakos and Cees G. M. Snoek and
+            Josef Sivic and Vladimir Petrik},
+    journal={arXiv preprint arXiv:2512.19562},
     year={2025}
-}
-    </code></pre>
+}</pre>
   </div>
 </section>
 
-<footer class="footer">
-  <div class="container">
-    <div class="content has-text-centered">
-      <a class="icon-link"
-         href="https://arxiv.org/abs/2512.19562">
-        <i class="fas fa-file-pdf"></i>
-      </a>
-      <a class="icon-link" href="https://github.com/martin-sedlacek/REALM/" class="external-link" disabled>
-        <i class="fab fa-github"></i>
-      </a>
-    </div>
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-          <p>
-            This website is licensed under a <a rel="license"
-                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
-          <p>
-            This means you are free to borrow the <a
-              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
-            we just ask that you link back to this page in the footer.
-            Please remember to remove the analytics code included in the header of the website which
-            you do not want on your website.
-          </p>
-        </div>
+<footer>
+  <div class="wrap">
+    <div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+        <img src="./static/images/realm_logo_vector.png" alt="" style="height:22px;filter:brightness(0) invert(1)" />
+        <span style="font:700 16px/1 var(--display);color:#fff;letter-spacing:.02em">REALM</span>
       </div>
+      <p>This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>. Built on the <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> project page template.</p>
+    </div>
+    <div class="links">
+      <a href="https://arxiv.org/abs/2512.19562">arXiv</a>
+      <a href="https://github.com/martin-sedlacek/REALM">GitHub</a>
     </div>
   </div>
 </footer>
 
 <script>
-  $(document).ready(function() {
-    bulmaCarousel.attach('#benchmark-carousel', {
-        slidesToScroll: 2,
-        slidesToShow: 5,
-        infinite: true,
-        autoplay: true,
-    });
+(function () {
+  'use strict';
 
-    const container = $('.perturbation-container');
-    const svgNS = "http://www.w3.org/2000/svg";
-    const svg = document.createElementNS(svgNS, 'svg');
-    svg.setAttribute('width', '100%');
-    svg.setAttribute('height', '100%');
-    svg.setAttribute('viewBox', '0 0 900 800');
-    container.append(svg);
-
-    const categories = [
-        'Default', 'V-AUG', 'V-VIEW', 'V-SC', 'V-LIGHT', 'S-PROP', 'S-LANG', 'S-MO', 'S-AFF', 'S-INT',
-        'B-HOBJ', 'SB-NOUN', 'SB-VRB', 'VB-POSE', 'VB-MOBJ', 'VSB-NOBJ'
-    ];
-    const category_colors = {
-        'Default': '#000000', 'V': '#76C876', 'S': '#C49B7F', 'B': '#A3CCFA',
-        'VB': '#45CACA', 'SB': '#C298FF', 'VSB': '#646464'
-    };
-    const numSegments = categories.length;
-    const cx = 450;
-    const cy = 400;
-    const outerRadius = 304;
-    const innerRadius = 264;
-    const labelRadius = outerRadius + 40;
-    const image_files = [
-        'gen_Default.png', 'gen_V-AUG.png', 'gen_V-VIEW.png', 'gen_V-SC.png', 'gen_V-LIGHT.png', 'gen_S-PROP.png',
-        'gen_S-LANG.png', 'gen_S-MO.png', 'gen_S-AFF.png', 'gen_S-INT.png', 'gen_B-HOBJ.png', 'gen_SB-NOUN.png',
-        'gen_SB-VRB.png', 'gen_VB-POSE.png', 'gen_VB-MOBJ.png', 'gen_VSB-NOBJ.png'
-    ]
-
-    function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
-      const angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
-      return {
-        x: centerX + (radius * Math.cos(angleInRadians)),
-        y: centerY + (radius * Math.sin(angleInRadians))
-      };
-    }
-
-    function describeAnnulusSector(x, y, outerRadius, innerRadius, startAngle, endAngle) {
-      const outerArcStart = polarToCartesian(x, y, outerRadius, endAngle);
-      const outerArcEnd = polarToCartesian(x, y, outerRadius, startAngle);
-      const innerArcStart = polarToCartesian(x, y, innerRadius, startAngle);
-      const innerArcEnd = polarToCartesian(x, y, innerRadius, endAngle);
-
-      const largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
-
-      const d = [
-          "M", outerArcStart.x, outerArcStart.y,
-          "A", outerRadius, outerRadius, 0, largeArcFlag, 0, outerArcEnd.x, outerArcEnd.y,
-          "L", innerArcStart.x, innerArcStart.y,
-          "A", innerRadius, innerRadius, 0, largeArcFlag, 1, innerArcEnd.x, innerArcEnd.y,
-          "Z"
-      ].join(" ");
-
-      return d;
-    }
-
-    const angleStep = 360 / numSegments;
-    const gap = 1; // Gap in degrees
-
-    for (let i = 0; i < numSegments; i++) {
-      const startAngle = i * angleStep + gap / 2;
-      const endAngle = (i + 1) * angleStep - gap / 2;
-      const category = categories[i];
-      const prefix = category.split('-')[0];
-      const color = category_colors[prefix] || '#808080';
-
-      const path = document.createElementNS(svgNS, 'path');
-      path.setAttribute('d', describeAnnulusSector(cx, cy, outerRadius, innerRadius, startAngle, endAngle));
-      path.setAttribute('fill', color);
-      path.classList.add('perturbation-segment');
-      path.dataset.image = `./static/images/${image_files[i]}`;
-      path.dataset.angle = startAngle + (angleStep - gap) / 2;
-      path.dataset.category = category;
-
-      const labelAngle = startAngle + (angleStep - gap) / 2;
-      const labelPos = polarToCartesian(cx, cy, labelRadius, labelAngle);
-
-      const text = document.createElementNS(svgNS, 'text');
-      text.setAttribute('x', labelPos.x);
-      text.setAttribute('y', labelPos.y);
-      text.classList.add('perturbation-label');
-      text.textContent = category;
-
-      const angleDeg = labelAngle % 360;
-      if (angleDeg > 180 && angleDeg < 360) {
-          text.setAttribute('text-anchor', 'end');
-      } else if (angleDeg > 0 && angleDeg < 180) {
-          text.setAttribute('text-anchor', 'start');
-      } else {
-          text.setAttribute('text-anchor', 'middle');
-      }
-      
-      if (angleDeg > 90 && angleDeg < 270) {
-          text.setAttribute('dominant-baseline', 'middle');
-      } else {
-          text.setAttribute('dominant-baseline', 'middle');
-      }
-
-      const g = document.createElementNS(svgNS, 'g');
-      g.appendChild(path);
-      svg.appendChild(g);
-      svg.appendChild(text);
-    }
-
-    const line = document.createElementNS(svgNS, 'line');
-    line.setAttribute('id', 'perturbation-line');
-    line.setAttribute('x1', cx);
-    line.setAttribute('y1', cy);
-    svg.appendChild(line);
-
-    const image = document.createElementNS(svgNS, 'image');
-    image.setAttribute('id', 'perturbation-image');
-    const imageSize = 319;
-    image.setAttribute('x', cx - imageSize / 2);
-    image.setAttribute('y', cy - imageSize / 2);
-    image.setAttribute('width', imageSize);
-    image.setAttribute('height', imageSize);
-    image.setAttribute('href', './static/images/gen_Default.png');
-    svg.appendChild(image);
-
-    $('.perturbation-segment').on('mouseover', function() {
-        const img_path = $(this).data('image')
-        fetch(img_path)
-            .then(res => {
-                if (res.ok) {
-                    $('#perturbation-image').attr('href', img_path);
-                } else {
-                    $('#perturbation-image').attr('href', './static/images/gen_Default.png');
-                }
-            });
-        
-        const angle = $(this).data('angle');
-        const lineEnd = polarToCartesian(cx, cy, innerRadius, angle);
-        $('#perturbation-line').attr('x2', lineEnd.x).attr('y2', lineEnd.y).show();
-
-        const category = $(this).data('category');
-        if (category === 'S-LANG') {
-            $('#perturbation-instruction').text('"Get hold of the spoon."');
-        } else if (category === 'S-AFF') {
-            $('#perturbation-instruction').text('"Ready the utensil for eating."');
-        } else if (category === 'S-INT') {
-            $('#perturbation-instruction').text('"Pick up the object typically made of metal."');
-        } else if (category === 'S-PROP') {
-            $('#perturbation-instruction').text('"Grasp the silver utensil."');
-        } else if (category === 'S-MO') {
-            $('#perturbation-instruction').text('"Pick up the spoon next to the white plate."');
-        } else if (category === 'SB-NOUN') {
-            $('#perturbation-instruction').text('"Pick up the soda can."');
-        } else if (category === 'SB-VRB') {
-            $('#perturbation-instruction').text('"Rotate the spoon."');
-        } else if (category === 'VB-MOBJ') {
-            $('#perturbation-instruction').text('"Pick up the spoon."');
-        } else if (category === 'VSB-NOBJ') {
-            $('#perturbation-instruction').text('"Pick up the **new object**"');
-        } else {
-            $('#perturbation-instruction').text('"Pick up the spoon."');
-        }
-    });
-
-    // Set initial state
-    const defaultSegment = $('.perturbation-segment[data-category="Default"]');
-    const angle = defaultSegment.data('angle');
-    const lineEnd = polarToCartesian(cx, cy, innerRadius, angle);
-    $('#perturbation-line').attr('x2', lineEnd.x).attr('y2', lineEnd.y).show();
+  /* ---------- teaser: never downloaded until the user asks ---------- */
+  var teaser = document.getElementById('teaser');
+  var teaserBtn = document.getElementById('teaser-play');
+  teaserBtn.addEventListener('click', function () {
+    if (!teaser.getAttribute('src')) { teaser.preload = 'auto'; teaser.src = './static/videos/REALM.mp4'; }
+    teaserBtn.style.display = 'none';
+    teaser.play().catch(function () {});
   });
-</script>
 
+  /* ---------- rollout carousel: one element per clip, loaded lazily ---------- */
+  var CLIPS = [
+    { src: './static/videos/put_banana_annotated.mp4', label: 'Put the banana in the box' },
+    { src: './static/videos/pick_spoon_annotated.mp4', label: 'Pick up the spoon' },
+    { src: './static/videos/stack_cubes_annotated.mp4', label: 'Stack the green block on the yellow block' },
+    { src: './static/videos/rotate_marker_annotated.mp4', label: 'Rotate the marker' }
+  ];
+  var stage = document.getElementById('clip-stage');
+  var dots = document.getElementById('clip-dots');
+  var vids = [], dotEls = [], clip = 0, stageVisible = false, warmT = null;
+
+  CLIPS.forEach(function (c, i) {
+    var v = document.createElement('video');
+    v.muted = true; v.loop = true; v.playsInline = true; v.controls = true; v.preload = 'none';
+    v.setAttribute('playsinline', '');
+    stage.appendChild(v); vids.push(v);
+
+    var d = document.createElement('button');
+    d.type = 'button'; d.setAttribute('aria-label', c.label);
+    d.addEventListener('click', function () { setClip(i); });
+    dots.appendChild(d); dotEls.push(d);
+  });
+
+  function setClip(i) { clip = (i + CLIPS.length) % CLIPS.length; sync(); }
+
+  function sync() {
+    vids.forEach(function (v, k) {
+      var on = k === clip;
+      v.classList.toggle('on', on);
+      dotEls[k].classList.toggle('on', on);
+      if (on && stageVisible) {
+        if (!v.getAttribute('src')) { v.preload = 'auto'; v.src = CLIPS[k].src; }
+        v.play().catch(function () {});
+      } else if (!v.paused) { v.pause(); }
+    });
+    clearTimeout(warmT);
+    if (stageVisible) {
+      warmT = setTimeout(function () {           // warm the next clip so switching is instant
+        var n = (clip + 1) % CLIPS.length, v = vids[n];
+        if (v && !v.getAttribute('src')) { v.preload = 'metadata'; v.src = CLIPS[n].src; }
+      }, 1500);
+    }
+  }
+
+  document.getElementById('clip-prev').addEventListener('click', function () { setClip(clip - 1); });
+  document.getElementById('clip-next').addEventListener('click', function () { setClip(clip + 1); });
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) { stageVisible = es[0].isIntersecting; sync(); }, { threshold: 0.15 }).observe(stage);
+  } else { stageVisible = true; }
+  sync();
+
+  /* ---------- perturbation wheel ---------- */
+  var CATS = ['Default','V-AUG','V-VIEW','V-SC','V-LIGHT','S-PROP','S-LANG','S-MO','S-AFF','S-INT','B-HOBJ','SB-NOUN','SB-VRB','VB-POSE','VB-MOBJ','VSB-NOBJ'];
+  var CAT_COLORS = { 'Default':'#0A1020','V':'#76C876','S':'#C49B7F','B':'#A3CCFA','VB':'#45CACA','SB':'#C298FF','VSB':'#646464' };
+  var HAVE_IMG = { 'Default':1,'V-AUG':1,'V-VIEW':1,'V-SC':1,'V-LIGHT':1,'VB-POSE':1,'VB-MOBJ':1,'VSB-NOBJ':1 };
+  var INSTR = {
+    'S-LANG':'Get hold of the spoon.',
+    'S-AFF':'Ready the utensil for eating.',
+    'S-INT':'Pick up the object typically made of metal.',
+    'S-PROP':'Grasp the silver utensil.',
+    'S-MO':'Pick up the spoon next to the white plate.',
+    'SB-NOUN':'Pick up the soda can.',
+    'SB-VRB':'Rotate the spoon.',
+    'VSB-NOBJ':'Pick up the new object.'
+  };
+  var CX = 450, CY = 400, RO = 304, RI = 264, LR = 322, NS = 'http://www.w3.org/2000/svg';
+
+  function polar(cx, cy, r, deg) { var a = (deg - 90) * Math.PI / 180; return { x: cx + r * Math.cos(a), y: cy + r * Math.sin(a) }; }
+  function sector(cx, cy, ro, ri, a0, a1) {
+    var os = polar(cx, cy, ro, a1), oe = polar(cx, cy, ro, a0), is = polar(cx, cy, ri, a0), ie = polar(cx, cy, ri, a1);
+    var laf = a1 - a0 <= 180 ? '0' : '1';
+    return ['M', os.x, os.y, 'A', ro, ro, 0, laf, 0, oe.x, oe.y, 'L', is.x, is.y, 'A', ri, ri, 0, laf, 1, ie.x, ie.y, 'Z'].join(' ');
+  }
+
+  var wheel = document.getElementById('wheel');
+  var scene = document.getElementById('wheel-scene');
+  var instr = document.getElementById('wheel-instruction');
+  var svg = document.createElementNS(NS, 'svg');
+  svg.setAttribute('viewBox', '0 0 900 800');
+  wheel.insertBefore(svg, scene);
+
+  var step = 360 / CATS.length, gap = 1, paths = [], labels = [];
+  var line = document.createElementNS(NS, 'line');
+  line.setAttribute('x1', CX); line.setAttribute('y1', CY);
+  line.setAttribute('stroke', '#0A1020'); line.setAttribute('stroke-width', '2');
+
+  CATS.forEach(function (cat, i) {
+    var a0 = i * step + gap / 2, a1 = (i + 1) * step - gap / 2, mid = a0 + (step - gap) / 2;
+    var p = document.createElementNS(NS, 'path');
+    p.setAttribute('d', sector(CX, CY, RO, RI, a0, a1));
+    p.setAttribute('fill', CAT_COLORS[cat.split('-')[0]] || '#808080');
+    p.addEventListener('mouseover', function () { select(i); });
+    svg.appendChild(p); paths.push(p);
+
+    var lp = polar(CX, CY, LR, mid), deg = mid % 360;
+    var el = document.createElement('div');
+    el.className = 'lbl'; el.textContent = cat;
+    el.style.left = (lp.x / 900 * 100).toFixed(3) + '%';
+    el.style.top = (lp.y / 800 * 100).toFixed(3) + '%';
+    var tx = (deg > 180.5 && deg < 359.5) ? '-100%' : ((deg > 0.5 && deg < 179.5) ? '0' : '-50%');
+    el.style.transform = 'translate(' + tx + ',-50%)';
+    wheel.appendChild(el); labels.push(el);
+  });
+  svg.appendChild(line);
+
+  function select(i) {
+    var cat = CATS[i];
+    paths.forEach(function (p, k) { p.classList.toggle('on', k === i); });
+    labels.forEach(function (l, k) { l.classList.toggle('on', k === i); });
+    var mid = i * step + gap / 2 + (step - gap) / 2, e = polar(CX, CY, RI, mid);
+    line.setAttribute('x2', e.x); line.setAttribute('y2', e.y);
+    scene.style.backgroundImage = 'url(./static/images/gen_' + (HAVE_IMG[cat] ? cat : 'Default') + '.png)';
+    instr.textContent = '“' + (INSTR[cat] || 'Pick up the spoon.') + '”';
+  }
+  select(0);
+
+  /* ---------- individual task results ---------- */
+  var TASKS = [
+    { short: 'Put block in bowl', instruction: 'Put the green block in the bowl', viz: 'put_block.png', res: 'res_put_block_into_bowl.png' },
+    { short: 'Put banana in box', instruction: 'Put the banana in the box', viz: 'put_banana.png', res: 'res_put_banana_into_box.png' },
+    { short: 'Rotate marker', instruction: 'Rotate the marker', viz: 'rotate_marker.png', res: 'res_rotate_marker.png' },
+    { short: 'Rotate mug', instruction: 'Rotate the mug', viz: 'gen_rotate_mug_cam1.png', res: 'res_rotate_mug.png' },
+    { short: 'Pick spoon', instruction: 'Pick up the spoon', viz: 'pick_spoon.png', res: 'res_pick_spoon.png' },
+    { short: 'Pick water bottle', instruction: 'Pick up the water bottle', viz: 'gen_pick_water_bottle_cam1.png', res: 'res_pick_water_bottle.png' },
+    { short: 'Stack cubes', instruction: 'Stack the green block on top of the yellow block', viz: 'gen_stack_cubes.png', res: 'res_stack_cubes.png' },
+    { short: 'Push switch', instruction: 'Push the switch', viz: 'gen_push_switch_cam1.png', res: 'res_push_switch.png' },
+    { short: 'Open drawer', instruction: 'Open the drawer', viz: 'gen_open_drawer.png', res: 'res_open_drawer.png' }
+  ];
+  var tabs = document.getElementById('task-tabs');
+  var tInstr = document.getElementById('task-instruction');
+  var tViz = document.getElementById('task-viz'), tRes = document.getElementById('task-res');
+  var tabEls = [];
+
+  TASKS.forEach(function (t, i) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.textContent = t.short;
+    b.addEventListener('click', function () { showTask(i); });
+    tabs.appendChild(b); tabEls.push(b);
+  });
+
+  function showTask(i) {
+    var t = TASKS[i];
+    tabEls.forEach(function (b, k) { b.classList.toggle('on', k === i); });
+    tInstr.textContent = '“' + t.instruction + '”';
+    tViz.src = './static/images/' + t.viz;
+    tRes.src = './static/images/' + t.res;
+  }
+  showTask(0);
+
+  /* ---------- bibtex ---------- */
+  var copyBtn = document.getElementById('copy-bib');
+  copyBtn.addEventListener('click', function () {
+    var text = document.getElementById('bib').textContent;
+    if (navigator.clipboard) { navigator.clipboard.writeText(text).catch(function () {}); }
+    copyBtn.textContent = 'Copied';
+    copyBtn.classList.add('done');
+    setTimeout(function () { copyBtn.textContent = 'Copy BibTeX'; copyBtn.classList.remove('done'); }, 1800);
+  });
+})();
+</script>
 </body>
 </html>
