@@ -56,6 +56,12 @@
   .btn-primary { background: var(--blue); border-color: var(--blue); color: #fff; padding: 14px 22px; }
   .btn-primary:hover { background: var(--blue-dark); border-color: var(--blue-dark); color: #fff; }
 
+  /* upgrade notice */
+  .notice { background: #C2261D; color: #fff; padding: 11px 32px; }
+  .notice > div { max-width: 1180px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; font: 400 14px/1.5 var(--sans); color: #FFE9E7; text-wrap: pretty; text-align: center; }
+  .notice strong { color: #fff; font-weight: 600; }
+  .notice .tag { font: 600 10.5px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.32); padding: 5px 9px; border-radius: 999px; }
+
   /* nav */
   header.top { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.88); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
   .navbar { max-width: 1180px; margin: 0 auto; padding: 0 32px; height: 64px; display: flex; align-items: center; gap: 32px; }
@@ -69,6 +75,8 @@
   .navcta { display: flex; gap: 8px; }
   .navcta a { font: 600 13px/1 var(--sans); padding: 10px 15px; border-radius: 7px; border: 1px solid #DCE1EC; color: var(--ink); }
   .navcta a:hover { border-color: var(--blue); color: var(--blue); text-decoration: none; }
+  .navcta a.tint { display: inline-flex; align-items: center; gap: 7px; background: var(--blue-tint); border-color: #D3E1FF; color: var(--blue); border-radius: 999px; }
+  .navcta a.tint:hover { background: #D9E7FF; border-color: #D3E1FF; color: var(--blue-dark); }
   .navcta a.solid { background: var(--blue); border-color: var(--blue); color: #fff; }
   .navcta a.solid:hover { background: var(--blue-dark); color: #fff; }
 
@@ -154,6 +162,19 @@
   .task-grid img { display: block; width: 100%; border-radius: 10px; border: 1px solid #EEF1F7; }
   .task-grid figcaption { font-size: 13.5px; color: var(--muted); text-align: center; margin-top: 12px; }
 
+  /* leaderboard */
+  .board { background: #fff; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+  .board-head, .board-row { display: grid; grid-template-columns: 56px 1.6fr repeat(3,1fr); align-items: center; }
+  .board-head { padding: 14px 24px; border-bottom: 1px solid #EEF1F7; background: #FBFCFE; font: 600 11px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  .board-head span:nth-child(n+3) { text-align: right; }
+  .board-row { padding: 18px 24px; border-bottom: 1px solid #F3F5FA; }
+  .board-row .r { font: 600 14px/1 var(--mono); color: #C3CBDA; }
+  .board-row .m { font: 500 15.5px/1.3 var(--sans); color: #C3CBDA; }
+  .board-row i { justify-self: end; width: 52px; height: 11px; border-radius: 4px; background: #EDF0F6; }
+  .board-foot { padding: 22px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .board-foot p { font: 400 14.5px/1.6 var(--sans); color: var(--muted); margin: 0; }
+  .board-foot .btn-primary { font-size: 14px; padding: 12px 18px; }
+
   /* bibtex + footer */
   pre.bib { margin: 0; background: #111A2E; border: 1px solid #232B41; border-radius: 12px; padding: 24px; overflow-x: auto; font: 400 13.5px/1.75 var(--mono); color: #C8D4EC; }
   .copybtn { font: 600 13px/1 var(--sans); color: #C8D4EC; background: transparent; border: 1px solid #2A3450; padding: 11px 16px; border-radius: 8px; cursor: pointer; }
@@ -177,6 +198,13 @@
 </head>
 <body>
 
+<div class="notice">
+  <div>
+    <span class="tag">In progress</span>
+    <span>We are upgrading REALM to <strong>v1.0.0</strong> — running on Isaac Sim 5.1 and OmniGibson 3.9.1, with major speedups, parallelization, full documentation, and a revised leaderboard.</span>
+  </div>
+</div>
+
 <header class="top">
   <div class="navbar">
     <a class="brand" href="#top"><img src="./static/images/realm_logo_vector.png" alt="REALM" /><span>REALM</span></a>
@@ -190,6 +218,8 @@
       <a href="#benchmark">Results</a>
     </nav>
     <div class="navcta">
+      <a class="tint" href="#leaderboard">🏆 Leaderboard</a>
+      <a href="https://github.com/martin-sedlacek/REALM/wiki">Docs</a>
       <a href="https://arxiv.org/abs/2512.19562">arXiv</a>
       <a class="solid" href="https://github.com/martin-sedlacek/REALM">Code</a>
     </div>
@@ -228,7 +258,12 @@
       <a class="btn" href="#video">
         <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 5.2l4.2 2.8-4.2 2.8V5.2z" fill="currentColor"/></svg>
         Teaser video</a>
+      <a class="btn" href="https://github.com/martin-sedlacek/REALM/wiki">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M2 2.5h4a2 2 0 0 1 2 2v9a1.6 1.6 0 0 0-1.6-1.2H2v-9.8z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M14 2.5h-4a2 2 0 0 0-2 2v9a1.6 1.6 0 0 1 1.6-1.2H14v-9.8z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+        Documentation</a>
     </div>
+    <div class="pill" style="margin:30px 0 0">
+      <i></i>Accepted to IEEE RA-L · To be presented at IROS 2026</div>
   </div>
 </section>
 
@@ -239,7 +274,7 @@
       <span style="font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#7C88A3">Overview of the environment</span>
     </div>
     <div class="video-shell">
-      <video id="teaser" controls playsinline preload="none" poster="./static/videos/REALM.jpg"></video>
+      <video id="teaser" controls playsinline preload="none"></video>
       <button class="play-overlay" id="teaser-play" type="button" aria-label="Play teaser video">
         <span class="disc"><svg width="26" height="26" viewBox="0 0 16 16" fill="#fff"><path d="M5.5 3.6l7 4.4-7 4.4V3.6z"/></svg></span>
         <span class="hint">Play teaser</span>
@@ -252,7 +287,7 @@
   <div class="wrap">
     <div class="eyebrow">Overview</div>
     <h2 class="sub">A simulation benchmark whose numbers track the real robot</h2>
-    <p class="lede">REALM is a large-scale realistic simulation environment and benchmark for generalization in robotic manipulation. It supports 7 distinct manipulation skills and stress-tests them against 15 perturbations. Through empirical validation, we show that evaluation results in simulation are strongly correlated with real-world performance.</p>
+    <p class="lede">REALM is a large-scale realistic simulation environment and benchmark for generalization in robotic manipulation. It supports 7 distinct manipulation skills and stress-tests them against 15 perturbations. Through empirical validation, we show that evaluation results in simulation are strongly correlated with real-world performance. Setup instructions, task definitions and the evaluation API are documented in the <a href="https://github.com/martin-sedlacek/REALM/wiki">repository wiki</a>.</p>
     <div class="stats">
       <div><b>15</b><small>perturbation factors</small></div>
       <div><b>7</b><small>manipulation skills</small></div>
@@ -364,7 +399,7 @@
   </div>
 </section>
 
-<section id="benchmark" class="wash" style="border-bottom:none">
+<section id="benchmark" class="wash">
   <div class="wrap">
     <div class="eyebrow">Benchmark Results</div>
     <h2 class="sub">Three VLAs, fifteen perturbations, eight tasks</h2>
@@ -403,6 +438,32 @@
   </div>
 </section>
 
+<section id="leaderboard" class="wash" style="border-bottom:none;border-top:1px solid #E1E6F0">
+  <div class="wrap">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;flex-wrap:wrap">
+      <div class="eyebrow" style="margin-bottom:0;display:flex;align-items:center;gap:14px"><span style="font-size:.78em;line-height:1">🏆</span>Leaderboard</div>
+      <span style="font:600 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--blue);background:var(--blue-tint);border:1px solid #D3E1FF;padding:7px 11px;border-radius:999px">Coming soon</span>
+    </div>
+    <h2 class="sub">A public ranking of the latest VLA models on REALM-base and REALM-articulated</h2>
+    <p class="lede">We are extending the evaluation beyond π0, π0-FAST and GR00T N1.5 to the current generation of open VLA policies, and will publish the full per-perturbation breakdown as a continuously updated leaderboard. Submissions of your own policy will be open alongside it.</p>
+
+    <div class="board">
+      <div class="board-head">
+        <span>#</span><span>Model</span><span>Default SR</span><span>Perturbed SR</span><span>Robustness Δ</span>
+      </div>
+      <div class="board-row"><span class="r">1</span><span class="m">To be announced</span><i></i><i></i><i></i></div>
+      <div class="board-row"><span class="r">2</span><span class="m">To be announced</span><i></i><i></i><i></i></div>
+      <div class="board-row"><span class="r">3</span><span class="m">To be announced</span><i></i><i></i><i></i></div>
+      <div class="board-row"><span class="r">4</span><span class="m">To be announced</span><i></i><i></i><i></i></div>
+      <div class="board-row"><span class="r">5</span><span class="m">To be announced</span><i></i><i></i><i></i></div>
+      <div class="board-foot">
+        <p>Results are being collected now — rankings publish with the camera-ready release.</p>
+        <a class="btn btn-primary" href="https://github.com/martin-sedlacek/REALM">Watch the repo for updates</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="BibTeX" class="dark">
   <div class="wrap">
     <div class="row-between" style="margin-bottom:22px">
@@ -435,6 +496,7 @@
     <div class="links">
       <a href="https://arxiv.org/abs/2512.19562">arXiv</a>
       <a href="https://github.com/martin-sedlacek/REALM">GitHub</a>
+      <a href="https://github.com/martin-sedlacek/REALM/wiki">Docs</a>
     </div>
   </div>
 </footer>
@@ -454,10 +516,10 @@
 
   /* ---------- rollout carousel: one element per clip, loaded lazily ---------- */
   var CLIPS = [
-    { src: './static/videos/put_banana_annotated.mp4', poster: './static/videos/put_banana_annotated.jpg', label: 'Put the banana in the box' },
-    { src: './static/videos/pick_spoon_annotated.mp4', poster: './static/videos/pick_spoon_annotated.jpg', label: 'Pick up the spoon' },
-    { src: './static/videos/stack_cubes_annotated.mp4', poster: './static/videos/stack_cubes_annotated.jpg', label: 'Stack the green block on the yellow block' },
-    { src: './static/videos/rotate_marker_annotated.mp4', poster: './static/videos/rotate_marker_annotated.jpg', label: 'Rotate the marker' }
+    { src: './static/videos/put_banana_annotated.mp4', label: 'Put the banana in the box' },
+    { src: './static/videos/pick_spoon_annotated.mp4', label: 'Pick up the spoon' },
+    { src: './static/videos/stack_cubes_annotated.mp4', label: 'Stack the green block on the yellow block' },
+    { src: './static/videos/rotate_marker_annotated.mp4', label: 'Rotate the marker' }
   ];
   var stage = document.getElementById('clip-stage');
   var dots = document.getElementById('clip-dots');
@@ -467,7 +529,6 @@
     var v = document.createElement('video');
     v.muted = true; v.loop = true; v.playsInline = true; v.controls = true; v.preload = 'none';
     v.setAttribute('playsinline', '');
-    v.poster = c.poster;                         // first frame paints before a byte of video arrives
     stage.appendChild(v); vids.push(v);
 
     var d = document.createElement('button');
